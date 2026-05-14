@@ -448,8 +448,12 @@ function Index() {
                 <li>🐘 Concierge digitization</li>
                 <li>👯 Annual printed photo book</li>
               </ul>
-              <button className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-lime transition-colors">
-                Talk to us
+              <button
+                onClick={() => handleSubscribe("curator_monthly")}
+                disabled={checkoutLoading}
+                className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-lime transition-colors disabled:opacity-60"
+              >
+                {checkoutLoading ? "Opening…" : "Become Curator"}
               </button>
             </div>
           </div>
