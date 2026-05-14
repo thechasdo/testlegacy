@@ -3,6 +3,12 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { usePaddleCheckout } from "@/hooks/use-paddle-checkout";
 import { useAuth } from "@/hooks/use-auth";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -742,7 +748,84 @@ function Index() {
         </div>
       </section>
 
-      {/* FOOTER CTA */}
+      {/* PRICING FAQ */}
+      <section id="faq" className="px-6 py-20 bg-pop-cream">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-pop-pink text-white px-4 py-1 rounded-full font-display uppercase text-sm border-2 border-pop-ink shadow-[4px_4px_0_var(--color-pop-ink)]">
+              The fine print, but loud
+            </span>
+            <h2 className="font-display text-5xl md:text-7xl uppercase text-pop-blue leading-none mt-6">
+              Pricing <span className="italic text-pop-pink">questions?</span>
+            </h2>
+            <p className="mt-4 text-lg font-bold text-pop-ink/70">
+              Everything about auto-renew, cancellations, and what's in each tier.
+            </p>
+          </div>
+
+          <div className="bg-white border-2 border-pop-ink rounded-3xl p-6 md:p-10 shadow-[12px_12px_0_var(--color-pop-yellow)]">
+            <Accordion type="single" collapsible className="w-full">
+              {[
+                {
+                  q: "Do plans auto-renew?",
+                  a: "Yes — every paid tier auto-renews on the same cycle you picked (monthly or yearly) so your memories never go offline. We email you a heads-up 7 days before any yearly renewal, and your card is charged on the renewal date. No surprise jumps in price — if we ever change pricing, your existing plan stays locked in.",
+                },
+                {
+                  q: "How does the yearly discount actually work?",
+                  a: "Yearly plans are roughly 20% cheaper than paying month-to-month. You pay the full year upfront and get the equivalent of about 2½ months free. The savings show on every tier card and in the comparison table — flip the Monthly/Yearly toggle to see the exact dollar amount you'd save.",
+                },
+                {
+                  q: "Can I cancel anytime?",
+                  a: "Yep, one click from your dashboard. No phone calls, no retention pop-ups, no guilt. If you cancel a monthly plan you keep access until the end of the current month. Cancel a yearly plan and you keep everything you paid for through the end of the year — we don't pro-rate refunds, but you don't lose a day either.",
+                },
+                {
+                  q: "What happens to my memories if I downgrade or cancel?",
+                  a: "Your stuff is yours. If you downgrade, we keep everything stored — features above your new tier just go read-only until you upgrade again. If you fully cancel, you have a 90-day window to export everything (photos, videos, voice memos, letters) as a zip. Nothing gets deleted without three separate emails first.",
+                },
+                {
+                  q: "What's the difference between Keepsake and Snapshot?",
+                  a: "Keepsake (free) is the always-on starter: 1 GB, 1 trusted heir, and basic future-send letters so you can try the platform forever. Snapshot ($9.99/mo) bumps you to 25 GB, 3 heirs, voice memos, and unlimited future-send — it's where most people land once they start uploading family photos in bulk.",
+                },
+                {
+                  q: "What unlocks at Collector and Archivist?",
+                  a: "Collector ($19.99/mo) is the most-loved tier: 100 GB, 10 heirs, video memos, custom domain, and collaborative albums so siblings or kids can add their own pieces. Archivist ($34.99/mo) adds 500 GB, AI auto-tagging, an annual printed photo book mailed to you, and concierge digitization — send us a shoebox of old prints, we scan and upload them.",
+                },
+                {
+                  q: "What's included in Curator?",
+                  a: "Curator ($49.99/mo, $479.90/yr) is the everything tier: unlimited storage, unlimited heirs, heirloom NFC tags (tap a physical object to play a memory), a dedicated human archivist, and priority forever-storage backed by our long-term endowment. It's built for families who are documenting multiple generations at once.",
+                },
+                {
+                  q: "Can I switch tiers mid-cycle?",
+                  a: "Anytime. Upgrades take effect immediately and we pro-rate the difference against your next bill. Downgrades take effect at the end of your current billing period so you get full value from what you already paid. Switching between monthly and yearly works the same way.",
+                },
+                {
+                  q: "Is my payment information secure?",
+                  a: "We never see or store your card details. All payments are processed by Paddle, our PCI-compliant payment partner, and your info lives encrypted on their side. You can update or remove your card anytime from the billing screen in your dashboard.",
+                },
+              ].map((item, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`item-${i}`}
+                  className="border-b-2 border-pop-ink/10 last:border-b-0"
+                >
+                  <AccordionTrigger className="font-display uppercase text-lg md:text-xl text-pop-blue hover:text-pop-pink hover:no-underline py-5 text-left">
+                    {item.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-base font-medium text-pop-ink/80 leading-relaxed pb-5">
+                    {item.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+
+          <p className="text-center mt-8 text-sm font-bold uppercase tracking-widest text-pop-ink/60">
+            Still wondering something? <a href="mailto:hi@chasdo.app" className="text-pop-pink underline hover:text-pop-blue">Email us</a> — a real human replies.
+          </p>
+        </div>
+      </section>
+
+
       <footer className="px-6 pb-12">
         <div className="max-w-6xl mx-auto bg-pop-yellow border-2 border-pop-ink rounded-[3rem] p-12 lg:p-20 relative overflow-hidden shadow-[16px_16px_0_var(--color-pop-pink)]">
           <Dolphin className="absolute -top-6 -left-6 size-36 text-pop-blue/20" />
