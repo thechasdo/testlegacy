@@ -23,7 +23,7 @@ export function Reveal({
   variant?: Variant;
   delay?: number;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
 }) {
   const { ref, shown } = useReveal<HTMLElement>();
   const Comp = Tag as any;
