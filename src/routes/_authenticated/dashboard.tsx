@@ -47,10 +47,10 @@ function Dashboard() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
       <h1 className="font-display text-5xl uppercase text-pop-blue">
-        Your legacies
+        Your souls
       </h1>
       <p className="mt-2 font-semibold text-pop-ink/70">
-        Each legacy is a vibrant little vault. Add memories inside.
+        Each soul is a vibrant little vault. Add memories inside.
       </p>
 
       <form
@@ -104,7 +104,7 @@ function Dashboard() {
         {isLoading && <p className="font-bold">Loading…</p>}
         {data?.legacies.length === 0 && (
           <p className="font-semibold text-pop-ink/60 col-span-full">
-            No legacies yet. Make your first one ↑
+            No souls yet. Make your first one ↑
           </p>
         )}
         {data?.legacies.map((l) => (
@@ -130,7 +130,7 @@ function Dashboard() {
               </p>
               <button
                 onClick={() => {
-                  if (confirm("Delete this legacy and all its memories?")) {
+                  if (confirm("Delete this soul and all its memories?")) {
                     delMut.mutate(l.id);
                   }
                 }}
