@@ -314,8 +314,26 @@ function Index() {
                   <div className="size-7 sm:size-8 rounded-full bg-pop-lime border-2 border-pop-ink" />
                 </div>
                 12,000+ legacies in bloom
-              </div>
             </div>
+
+            {/* TRUST BADGES */}
+            <ul className="mt-7 sm:mt-8 flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+              {[
+                { icon: "🔒", label: "AES-256 encrypted", bg: "bg-pop-lime" },
+                { icon: "🚪", label: "Cancel anytime", bg: "bg-pop-yellow" },
+                { icon: "🛡️", label: "Privacy-first, no ads", bg: "bg-pop-pink", fg: "text-white" },
+                { icon: "♾️", label: "100-yr storage promise", bg: "bg-pop-sky" },
+              ].map((b) => (
+                <li
+                  key={b.label}
+                  className={`${b.bg} ${b.fg ?? "text-pop-ink"} border-2 border-pop-ink rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-[2px_2px_0_var(--color-pop-ink)] hover:-translate-y-0.5 transition-transform`}
+                >
+                  <span aria-hidden>{b.icon}</span>
+                  {b.label}
+                </li>
+              ))}
+            </ul>
+          </div>
           </div>
 
           {/* Hero collage */}
