@@ -87,8 +87,21 @@ function Sun({ className = "" }: { className?: string }) {
 /* ---------- page ---------- */
 
 function Index() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { openCheckout, loading: checkoutLoading } = usePaddleCheckout();
+
+  const handleSubscribe = (priceId: string) => {
+    if (!user) {
+      navigate({ to: "/login" });
+      return;
+    }
+    openCheckout({ priceId, userId: user.id, customerEmail: user.email });
+  };
+
   return (
     <div className="min-h-screen bg-pop-cream text-pop-ink overflow-x-hidden selection:bg-pop-pink selection:text-white">
+      <PaymentTestModeBanner />
       {/* NAV */}
       <nav className="relative z-20 max-w-7xl mx-auto flex items-center justify-between px-6 py-6">
         <div className="flex items-center gap-2">
