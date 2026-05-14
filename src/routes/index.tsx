@@ -395,7 +395,10 @@ function Index() {
                 <li>🐘 2 trusted heirs</li>
                 <li>👯 3 future-send letters</li>
               </ul>
-              <button className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow transition-colors">
+              <button
+                onClick={() => navigate({ to: user ? "/dashboard" : "/login" })}
+                className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow transition-colors"
+              >
                 Start free
               </button>
             </div>
