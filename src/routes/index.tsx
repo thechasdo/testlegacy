@@ -313,7 +313,7 @@ function Index() {
                   <div className="size-7 sm:size-8 rounded-full bg-pop-pink border-2 border-pop-ink" />
                   <div className="size-7 sm:size-8 rounded-full bg-pop-lime border-2 border-pop-ink" />
                 </div>
-                12,000+ legacies in bloom
+                12,000+ souls in bloom
             </div>
 
             {/* TRUST BADGES */}
