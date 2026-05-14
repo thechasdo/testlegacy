@@ -9,7 +9,7 @@ export const getSharedSoul = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const { data: share, error } = await supabaseAdmin
       .from("legacy_shares")
-      .select("id,legacy_id,expires_at,revoked_at,label")
+      .select("id,legacy_id,expires_at,revoked_at,label,view_count")
       .eq("token", data.token)
       .maybeSingle();
     if (error) throw new Error(error.message);
@@ -31,11 +31,9 @@ export const getSharedSoul = createServerFn({ method: "GET" })
         .order("created_at", { ascending: false }),
     ]);
 
-    // best-effort view counter
-    await supabaseAdmin.rpc as unknown;
     await supabaseAdmin
       .from("legacy_shares")
-      .update({ view_count: (await getCount(share.id)) + 1 })
+      .update({ view_count: (share.view_count ?? 0) + 1 })
       .eq("id", share.id);
 
     return {
@@ -46,12 +44,3 @@ export const getSharedSoul = createServerFn({ method: "GET" })
       memories: memories ?? [],
     };
   });
-
-async function getCount(id: string) {
-  const { data } = await supabaseAdmin
-    .from("legacy_shares")
-    .select("view_count")
-    .eq("id", id)
-    .single();
-  return data?.view_count ?? 0;
-}
