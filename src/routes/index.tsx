@@ -463,7 +463,7 @@ function Index() {
                 A peek at <span className="text-pop-yellow">the album.</span>
               </h2>
               <p className="text-lg font-semibold max-w-md text-pop-cream/80">
-                Real legacies live like scrapbooks — taped, tilted, slightly
+                Real souls live like scrapbooks — taped, tilted, slightly
                 jam-stained. Yours will too.
               </p>
             </div>
