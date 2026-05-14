@@ -7,6 +7,7 @@ import {
   addMemory,
   deleteMemory,
 } from "@/lib/legacy.functions";
+import { ShareSoulPanel } from "@/components/ShareSoulPanel";
 
 export const Route = createFileRoute("/_authenticated/legacy/$id")({
   component: LegacyDetail,
