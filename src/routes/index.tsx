@@ -617,6 +617,128 @@ function Index() {
           <p className="text-center mt-10 text-sm font-semibold text-pop-ink/60">
             All plans auto-renew · cancel anytime in your dashboard · prices in USD
           </p>
+
+          {/* COMPARISON TABLE */}
+          <div className="mt-24">
+            <h3 className="font-display text-3xl md:text-5xl uppercase text-pop-blue text-center mb-3">
+              Compare the <span className="text-pop-pink">whole party.</span>
+            </h3>
+            <p className="text-center text-sm font-semibold text-pop-ink/60 mb-10">
+              Showing <span className="bg-pop-yellow px-2 border border-pop-ink rounded">{cycle === "yearly" ? "yearly" : "monthly"}</span> pricing · toggle above to flip
+            </p>
+
+            <div className="overflow-x-auto border-2 border-pop-ink rounded-3xl bg-white shadow-pop-blue">
+              <table className="w-full min-w-[900px] text-left">
+                <thead>
+                  <tr className="border-b-2 border-pop-ink">
+                    <th className="p-4 font-display uppercase text-pop-blue text-sm sticky left-0 bg-white z-10 min-w-[200px]">
+                      Feature
+                    </th>
+                    {TIERS.map((t) => {
+                      const featured = "featured" in t && t.featured;
+                      return (
+                        <th
+                          key={t.id}
+                          className={`p-4 text-center align-bottom min-w-[140px] ${featured ? "bg-pop-pink text-white" : ""}`}
+                        >
+                          <div className="font-display uppercase text-lg">{t.name}</div>
+                          <div className={`font-display text-2xl mt-2 ${featured ? "text-pop-yellow" : "text-pop-pink"}`}>
+                            {t.monthly === 0
+                              ? "Free"
+                              : cycle === "yearly"
+                              ? fmt(t.yearly / 12)
+                              : fmt(t.monthly)}
+                            {t.monthly !== 0 && (
+                              <span className={`text-[10px] font-sans ml-1 ${featured ? "text-white/70" : "text-pop-ink/50"}`}>
+                                /mo
+                              </span>
+                            )}
+                          </div>
+                          <div className={`text-[10px] font-bold uppercase mt-1 ${featured ? "text-white/80" : "text-pop-ink/60"}`}>
+                            {t.monthly === 0
+                              ? "Forever"
+                              : cycle === "yearly"
+                              ? `${fmt(t.yearly)}/yr`
+                              : "billed monthly"}
+                          </div>
+                        </th>
+                      );
+                    })}
+                  </tr>
+                </thead>
+                <tbody className="font-semibold text-sm">
+                  {[
+                    { label: "🐬 Memory storage", values: ["1 GB", "10 GB", "100 GB", "500 GB", "1 TB"] },
+                    { label: "🐘 Trusted heirs", values: ["2", "5", "Unlimited", "Unlimited", "Unlimited"] },
+                    { label: "👯 Future-send letters", values: ["3", "25", "Unlimited", "Smart triggers", "White-glove"] },
+                    { label: "🎙️ Voice memos (HQ)", values: [false, true, true, true, true] },
+                    { label: "📼 Video memos", values: [false, "SD", "HD", "4K", "4K + RAW"] },
+                    { label: "🌞 Custom domain", values: ["Add-on", true, true, "Multi", "Multi + email"] },
+                    { label: "🎀 Collaborative albums", values: [false, false, true, true, true] },
+                    { label: "🔍 Auto-tagging & search", values: [false, false, false, true, true] },
+                    { label: "📚 Annual printed photo book", values: ["Add-on", "Zine add-on", "Add-on", true, true] },
+                    { label: "🐠 Concierge digitization", values: [false, false, "Add-on", true, true] },
+                    { label: "🦩 Heirloom NFC tags", values: [false, false, false, "Add-on", "4/yr included"] },
+                    { label: "✨ Dedicated archivist", values: [false, false, false, false, true] },
+                    { label: "♾️ Priority forever-storage", values: [false, false, false, false, true] },
+                  ].map((row, i) => (
+                    <tr
+                      key={row.label}
+                      className={`border-t border-pop-ink/10 ${i % 2 === 0 ? "bg-pop-cream/30" : ""}`}
+                    >
+                      <td className="p-4 font-bold sticky left-0 bg-inherit z-10">
+                        {row.label}
+                      </td>
+                      {row.values.map((v, idx) => {
+                        const featured = "featured" in TIERS[idx] && (TIERS[idx] as any).featured;
+                        return (
+                          <td
+                            key={idx}
+                            className={`p-4 text-center ${featured ? "bg-pop-pink/10" : ""}`}
+                          >
+                            {v === true ? (
+                              <span className="inline-flex items-center justify-center size-7 rounded-full bg-pop-lime border-2 border-pop-ink font-display">
+                                ✓
+                              </span>
+                            ) : v === false ? (
+                              <span className="text-pop-ink/30 font-display">—</span>
+                            ) : (
+                              <span>{v}</span>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                  {/* CTA row */}
+                  <tr className="border-t-2 border-pop-ink bg-pop-yellow/40">
+                    <td className="p-4 font-display uppercase text-pop-blue sticky left-0 bg-pop-yellow/40 z-10">
+                      Get it
+                    </td>
+                    {TIERS.map((t) => {
+                      const priceId = cycle === "yearly" ? t.yearlyPriceId : t.monthlyPriceId;
+                      const featured = "featured" in t && t.featured;
+                      return (
+                        <td key={t.id} className="p-4 text-center">
+                          <button
+                            onClick={() => handleSubscribe(priceId)}
+                            disabled={checkoutLoading && !!priceId}
+                            className={`px-4 py-2 rounded-full border-2 border-pop-ink font-bold uppercase text-xs transition-colors disabled:opacity-60 ${
+                              featured
+                                ? "bg-pop-pink text-white hover:bg-pop-blue"
+                                : "bg-white text-pop-ink hover:bg-pop-pink hover:text-white"
+                            }`}
+                          >
+                            {checkoutLoading && !!priceId ? "Opening…" : t.cta}
+                          </button>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </section>
 
