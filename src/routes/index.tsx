@@ -1,4 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { usePaddleCheckout } from "@/hooks/use-paddle-checkout";
+import { useAuth } from "@/hooks/use-auth";
+import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -84,8 +87,21 @@ function Sun({ className = "" }: { className?: string }) {
 /* ---------- page ---------- */
 
 function Index() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { openCheckout, loading: checkoutLoading } = usePaddleCheckout();
+
+  const handleSubscribe = (priceId: string) => {
+    if (!user) {
+      navigate({ to: "/login" });
+      return;
+    }
+    openCheckout({ priceId, userId: user.id, customerEmail: user.email });
+  };
+
   return (
     <div className="min-h-screen bg-pop-cream text-pop-ink overflow-x-hidden selection:bg-pop-pink selection:text-white">
+      <PaymentTestModeBanner />
       {/* NAV */}
       <nav className="relative z-20 max-w-7xl mx-auto flex items-center justify-between px-6 py-6">
         <div className="flex items-center gap-2">
@@ -379,7 +395,10 @@ function Index() {
                 <li>🐘 2 trusted heirs</li>
                 <li>👯 3 future-send letters</li>
               </ul>
-              <button className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow transition-colors">
+              <button
+                onClick={() => navigate({ to: user ? "/dashboard" : "/login" })}
+                className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow transition-colors"
+              >
                 Start free
               </button>
             </div>
@@ -403,8 +422,12 @@ function Index() {
                 <li>👯 Unlimited future-sends</li>
                 <li>✨ Collaborative family albums</li>
               </ul>
-              <button className="mt-8 py-3 rounded-full bg-white text-pop-pink border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow hover:text-pop-ink transition-colors">
-                Choose Collector
+              <button
+                onClick={() => handleSubscribe("collector_monthly")}
+                disabled={checkoutLoading}
+                className="mt-8 py-3 rounded-full bg-white text-pop-pink border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow hover:text-pop-ink transition-colors disabled:opacity-60"
+              >
+                {checkoutLoading ? "Opening…" : "Choose Collector"}
               </button>
             </div>
 
@@ -425,8 +448,12 @@ function Index() {
                 <li>🐘 Concierge digitization</li>
                 <li>👯 Annual printed photo book</li>
               </ul>
-              <button className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-lime transition-colors">
-                Talk to us
+              <button
+                onClick={() => handleSubscribe("curator_monthly")}
+                disabled={checkoutLoading}
+                className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-lime transition-colors disabled:opacity-60"
+              >
+                {checkoutLoading ? "Opening…" : "Become Curator"}
               </button>
             </div>
           </div>
