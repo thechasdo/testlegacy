@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { usePaddleCheckout } from "@/hooks/use-paddle-checkout";
 import { useAuth } from "@/hooks/use-auth";
