@@ -14,16 +14,154 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      legacies: {
+        Row: {
+          cover_color: string
+          created_at: string
+          description: string | null
+          id: string
+          plan: Database["public"]["Enums"]["legacy_plan"]
+          slug: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cover_color?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          plan?: Database["public"]["Enums"]["legacy_plan"]
+          slug?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cover_color?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          plan?: Database["public"]["Enums"]["legacy_plan"]
+          slug?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      memories: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          kind: Database["public"]["Enums"]["memory_kind"]
+          legacy_id: string
+          media_url: string | null
+          scheduled_for: string | null
+          tag: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["memory_kind"]
+          legacy_id: string
+          media_url?: string | null
+          scheduled_for?: string | null
+          tag?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["memory_kind"]
+          legacy_id?: string
+          media_url?: string | null
+          scheduled_for?: string | null
+          tag?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "memories_legacy_id_fkey"
+            columns: ["legacy_id"]
+            isOneToOne: false
+            referencedRelation: "legacies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      legacy_plan: "keepsake" | "collector" | "curator"
+      memory_kind: "photo" | "voice" | "letter" | "recipe" | "document"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +288,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      legacy_plan: ["keepsake", "collector", "curator"],
+      memory_kind: ["photo", "voice", "letter", "recipe", "document"],
+    },
   },
 } as const
