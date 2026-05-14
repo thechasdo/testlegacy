@@ -847,7 +847,7 @@ function Index() {
           </div>
 
           <p className="text-center mt-8 text-sm font-bold uppercase tracking-widest text-pop-ink/60">
-            Still wondering something? <a href="mailto:hi@chasdo.app" className="text-pop-pink underline hover:text-pop-blue">Email us</a> — a real human replies.
+            Still wondering something? <a href="mailto:hi@digitalsoul.app" className="text-pop-pink underline hover:text-pop-blue">Email us</a> — a real human replies.
           </p>
         </div>
       </section>
