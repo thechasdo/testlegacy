@@ -130,7 +130,7 @@ function Dashboard() {
               </p>
               <button
                 onClick={() => {
-                  if (confirm("Delete this legacy and all its memories?")) {
+                  if (confirm("Delete this soul and all its memories?")) {
                     delMut.mutate(l.id);
                   }
                 }}
