@@ -73,6 +73,8 @@ function LegacyDetail() {
         <p className="mt-2 font-semibold text-pop-ink/70">{l.description}</p>
       )}
 
+      <ShareSoulPanel legacyId={id} />
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
