@@ -73,13 +73,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "chasdo — Live forever in high def" },
+      { title: "Digital Soul — Live forever in high def" },
       {
         name: "description",
         content:
-          "chasdo is a vibrant digital legacy vault. Save your stories, voice notes, photos and the messy living parts of you — for the people who'll remember.",
+          "Digital Soul is a vibrant vault for your soul. Save your stories, voice notes, photos and the messy living parts of you — for the people who'll remember.",
       },
-      { property: "og:title", content: "chasdo — Live forever in high def" },
+      { property: "og:title", content: "Digital Soul — Live forever in high def" },
       {
         property: "og:description",
         content:
