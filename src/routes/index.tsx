@@ -264,7 +264,7 @@ function Index() {
           href="#pricing"
           className="bg-pop-blue text-white px-6 py-2.5 rounded-full font-bold uppercase tracking-tight text-sm border-2 border-pop-ink shadow-pop-pink hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-transform"
         >
-          Join the Legacy
+          Claim Your Soul
         </a>
       </nav>
 
