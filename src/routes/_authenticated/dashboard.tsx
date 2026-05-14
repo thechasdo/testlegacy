@@ -47,10 +47,10 @@ function Dashboard() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
       <h1 className="font-display text-5xl uppercase text-pop-blue">
-        Your legacies
+        Your souls
       </h1>
       <p className="mt-2 font-semibold text-pop-ink/70">
-        Each legacy is a vibrant little vault. Add memories inside.
+        Each soul is a vibrant little vault. Add memories inside.
       </p>
 
       <form
