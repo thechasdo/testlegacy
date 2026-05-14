@@ -529,14 +529,16 @@ function Index() {
       {/* PRICING */}
       <section id="pricing" className="px-6 py-32">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-5xl md:text-7xl uppercase text-pop-blue">
-              Pick your <span className="text-pop-pink">volume.</span>
-            </h2>
-            <p className="mt-4 text-lg font-semibold text-pop-ink/70">
-              Five tiers. Auto-renews so the party never stops. Yearly saves you ~20%.
-            </p>
-          </div>
+          <Reveal variant="up">
+            <div className="text-center mb-12">
+              <h2 className="font-display text-5xl md:text-7xl uppercase text-pop-blue">
+                Pick your <span className="text-pop-pink">volume.</span>
+              </h2>
+              <p className="mt-4 text-lg font-semibold text-pop-ink/70">
+                Five tiers. Auto-renews so the party never stops. Yearly saves you ~20%.
+              </p>
+            </div>
+          </Reveal>
 
           {/* Billing toggle */}
           <div className="flex justify-center mb-14">
