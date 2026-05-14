@@ -390,13 +390,15 @@ function Index() {
       {/* VALUE PROPS */}
       <section id="vault" className="px-6 py-32">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-5xl md:text-7xl uppercase text-pop-blue mb-4">
-            Three rules of <span className="text-pop-pink">a life kept well.</span>
-          </h2>
-          <p className="text-xl font-semibold max-w-2xl mb-16 text-pop-ink/70">
-            We didn’t build a hard drive. We built a kitchen-table archive for
-            the stuff that actually matters.
-          </p>
+          <Reveal variant="up">
+            <h2 className="font-display text-5xl md:text-7xl uppercase text-pop-blue mb-4">
+              Three rules of <span className="text-pop-pink">a life kept well.</span>
+            </h2>
+            <p className="text-xl font-semibold max-w-2xl mb-16 text-pop-ink/70">
+              We didn’t build a hard drive. We built a kitchen-table archive for
+              the stuff that actually matters.
+            </p>
+          </Reveal>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -427,18 +429,19 @@ function Index() {
                 shadow: "shadow-pop-blue",
                 Icon: Twins,
               },
-            ].map(({ num, title, body, bg, fg, shadow, Icon }) => (
-              <div
-                key={num}
-                className={`${bg} ${fg} border-2 border-pop-ink rounded-3xl p-8 ${shadow} hover:-translate-y-1 transition-transform`}
-              >
-                <div className="flex items-start justify-between mb-6">
-                  <span className="font-display text-5xl">{num}</span>
-                  <Icon className="size-14 opacity-90" />
+            ].map(({ num, title, body, bg, fg, shadow, Icon }, i) => (
+              <Reveal key={num} variant="up" delay={i * 120}>
+                <div
+                  className={`${bg} ${fg} border-2 border-pop-ink rounded-3xl p-8 ${shadow} hover:-translate-y-1 transition-transform`}
+                >
+                  <div className="flex items-start justify-between mb-6">
+                    <span className="font-display text-5xl">{num}</span>
+                    <Icon className="size-14 opacity-90" />
+                  </div>
+                  <h3 className="font-display text-3xl uppercase mb-3">{title}</h3>
+                  <p className="text-base font-semibold leading-relaxed">{body}</p>
                 </div>
-                <h3 className="font-display text-3xl uppercase mb-3">{title}</h3>
-                <p className="text-base font-semibold leading-relaxed">{body}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
