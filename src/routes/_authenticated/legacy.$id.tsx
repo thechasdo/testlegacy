@@ -8,6 +8,7 @@ import {
   deleteMemory,
 } from "@/lib/legacy.functions";
 import { ShareSoulPanel } from "@/components/ShareSoulPanel";
+import { InviteSoulPanel } from "@/components/InviteSoulPanel";
 
 export const Route = createFileRoute("/_authenticated/legacy/$id")({
   component: LegacyDetail,
@@ -74,6 +75,7 @@ function LegacyDetail() {
       )}
 
       <ShareSoulPanel legacyId={id} />
+      <InviteSoulPanel legacyId={id} />
 
       <form
         onSubmit={(e) => {
