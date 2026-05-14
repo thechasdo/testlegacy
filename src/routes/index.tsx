@@ -498,112 +498,125 @@ function Index() {
       {/* PRICING */}
       <section id="pricing" className="px-6 py-32">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="font-display text-5xl md:text-7xl uppercase text-pop-blue">
               Pick your <span className="text-pop-pink">volume.</span>
             </h2>
             <p className="mt-4 text-lg font-semibold text-pop-ink/70">
-              Plans that grow with you. Add-ons for the maximalists.
+              Five tiers. Auto-renews so the party never stops. Yearly saves you ~20%.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Tier 1 */}
-            <div className="bg-white border-2 border-pop-ink rounded-3xl p-10 flex flex-col shadow-pop-yellow">
-              <span className="font-display text-2xl text-pop-blue uppercase">
-                Keepsake
-              </span>
-              <p className="text-sm font-semibold text-pop-ink/60 mt-1">
-                For getting started.
-              </p>
-              <div className="font-display text-6xl text-pop-ink mt-6">
-                $0
-                <span className="text-lg font-sans text-pop-ink/40">/mo</span>
-              </div>
-              <ul className="mt-8 space-y-3 flex-1 font-semibold text-sm">
-                <li>🐬 1 GB of memories</li>
-                <li>🐘 2 trusted heirs</li>
-                <li>👯 3 future-send letters</li>
-              </ul>
+          {/* Billing toggle */}
+          <div className="flex justify-center mb-14">
+            <div className="inline-flex items-center gap-1 bg-white border-2 border-pop-ink rounded-full p-1 shadow-pop-pink">
               <button
-                onClick={() => navigate({ to: user ? "/dashboard" : "/login" })}
-                className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow transition-colors"
+                onClick={() => setCycle("monthly")}
+                className={`px-5 py-2 rounded-full font-bold text-sm uppercase tracking-tight transition-colors ${
+                  cycle === "monthly"
+                    ? "bg-pop-blue text-white"
+                    : "text-pop-ink hover:bg-pop-yellow"
+                }`}
               >
-                Start free
+                Monthly
               </button>
-            </div>
-
-            {/* Tier 2 - featured */}
-            <div className="bg-pop-pink text-white border-2 border-pop-ink rounded-3xl p-10 flex flex-col shadow-[10px_10px_0_var(--color-pop-blue)] md:scale-105 relative">
-              <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-pop-yellow text-pop-ink border-2 border-pop-ink px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
-                Most loved
-              </span>
-              <span className="font-display text-2xl uppercase">Collector</span>
-              <p className="text-sm font-semibold text-white/80 mt-1">
-                For a lifetime of stories.
-              </p>
-              <div className="font-display text-6xl mt-6">
-                $12
-                <span className="text-lg font-sans text-white/60">/mo</span>
-              </div>
-              <ul className="mt-8 space-y-3 flex-1 font-semibold text-sm">
-                <li>🐬 100 GB + voice memos</li>
-                <li>🐘 Unlimited heirs</li>
-                <li>👯 Unlimited future-sends</li>
-                <li>✨ Collaborative family albums</li>
-              </ul>
               <button
-                onClick={() => handleSubscribe("collector_monthly")}
-                disabled={checkoutLoading}
-                className="mt-8 py-3 rounded-full bg-white text-pop-pink border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow hover:text-pop-ink transition-colors disabled:opacity-60"
+                onClick={() => setCycle("yearly")}
+                className={`px-5 py-2 rounded-full font-bold text-sm uppercase tracking-tight transition-colors flex items-center gap-2 ${
+                  cycle === "yearly"
+                    ? "bg-pop-blue text-white"
+                    : "text-pop-ink hover:bg-pop-yellow"
+                }`}
               >
-                {checkoutLoading ? "Opening…" : "Choose Collector"}
-              </button>
-            </div>
-
-            {/* Tier 3 */}
-            <div className="bg-white border-2 border-pop-ink rounded-3xl p-10 flex flex-col shadow-pop-lime">
-              <span className="font-display text-2xl text-pop-blue uppercase">
-                Curator
-              </span>
-              <p className="text-sm font-semibold text-pop-ink/60 mt-1">
-                For the family historian.
-              </p>
-              <div className="font-display text-6xl text-pop-ink mt-6">
-                $29
-                <span className="text-lg font-sans text-pop-ink/40">/mo</span>
-              </div>
-              <ul className="mt-8 space-y-3 flex-1 font-semibold text-sm">
-                <li>🐬 1 TB high-res video vault</li>
-                <li>🐘 Concierge digitization</li>
-                <li>👯 Annual printed photo book</li>
-              </ul>
-              <button
-                onClick={() => handleSubscribe("curator_monthly")}
-                disabled={checkoutLoading}
-                className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-lime transition-colors disabled:opacity-60"
-              >
-                {checkoutLoading ? "Opening…" : "Become Curator"}
+                Yearly
+                <span className="bg-pop-lime text-pop-ink border border-pop-ink px-2 py-0.5 rounded-full text-[10px]">
+                  save 20%
+                </span>
               </button>
             </div>
           </div>
 
-          {/* add-ons */}
-          <div className="mt-16 flex flex-wrap gap-4 justify-center">
-            {[
-              { label: "Custom domain · +$5/mo", bg: "bg-pop-yellow", r: "rotate-2" },
-              { label: "Video vault · +$8/mo", bg: "bg-pop-pink text-white", r: "-rotate-2" },
-              { label: "Extra 500 GB · +$10/mo", bg: "bg-pop-lime", r: "rotate-1" },
-              { label: "Annual photo book · +$45/yr", bg: "bg-pop-sky", r: "-rotate-3" },
-            ].map((a) => (
-              <span
-                key={a.label}
-                className={`${a.bg} ${a.r} border-2 border-pop-ink px-5 py-2 rounded-full font-bold text-sm uppercase tracking-tight`}
-              >
-                {a.label}
-              </span>
-            ))}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {TIERS.map((tier) => {
+              const isYearly = cycle === "yearly";
+              const priceId = isYearly ? tier.yearlyPriceId : tier.monthlyPriceId;
+              const isFree = tier.monthly === 0;
+              const monthlyEquiv = isYearly && !isFree ? tier.yearly / 12 : tier.monthly;
+              const yearlyTotal = tier.yearly;
+              const featured = "featured" in tier && tier.featured;
+
+              return (
+                <div
+                  key={tier.id}
+                  className={`${tier.accent} ${tier.text} border-2 border-pop-ink rounded-3xl p-7 flex flex-col ${tier.shadow} ${
+                    featured ? "lg:-translate-y-4 relative" : "relative"
+                  } hover:-translate-y-1 transition-transform`}
+                >
+                  {featured && (
+                    <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-pop-yellow text-pop-ink border-2 border-pop-ink px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">
+                      Most loved
+                    </span>
+                  )}
+                  <span className="font-display text-2xl uppercase">{tier.name}</span>
+                  <p className={`text-xs font-semibold mt-1 ${featured ? "text-white/80" : "text-pop-ink/60"}`}>
+                    {tier.tagline}
+                  </p>
+
+                  <div className="mt-5">
+                    <div className="font-display text-5xl leading-none">
+                      {fmt(monthlyEquiv)}
+                      <span className={`text-sm font-sans ml-1 ${featured ? "text-white/70" : "text-pop-ink/50"}`}>
+                        /mo
+                      </span>
+                    </div>
+                    <div className={`mt-2 text-[11px] font-bold uppercase tracking-widest ${featured ? "text-white/80" : "text-pop-ink/60"}`}>
+                      {isFree
+                        ? "Forever free"
+                        : isYearly
+                        ? `Billed ${fmt(yearlyTotal)}/yr · auto-renews`
+                        : `${fmt(tier.monthly)}/mo · auto-renews`}
+                    </div>
+                    {isYearly && !isFree && (
+                      <div className="mt-1 inline-block bg-pop-lime text-pop-ink border border-pop-ink px-2 py-0.5 rounded-full text-[10px] font-bold uppercase">
+                        save {fmt(tier.monthly * 12 - tier.yearly)}/yr
+                      </div>
+                    )}
+                  </div>
+
+                  <ul className="mt-6 space-y-2 flex-1 font-semibold text-sm">
+                    {tier.features.map((f) => (
+                      <li key={f}>{f}</li>
+                    ))}
+                  </ul>
+
+                  {tier.addons.length > 0 && (
+                    <div className={`mt-5 pt-4 border-t-2 border-dashed ${featured ? "border-white/40" : "border-pop-ink/20"}`}>
+                      <div className={`text-[10px] font-bold uppercase tracking-widest mb-2 ${featured ? "text-white/80" : "text-pop-ink/50"}`}>
+                        Add-ons
+                      </div>
+                      <ul className="space-y-1 text-xs font-semibold">
+                        {tier.addons.map((a) => (
+                          <li key={a}>{a}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <button
+                    onClick={() => handleSubscribe(priceId)}
+                    disabled={checkoutLoading && !!priceId}
+                    className={`mt-6 py-3 rounded-full border-2 font-bold uppercase text-sm transition-colors disabled:opacity-60 ${tier.button}`}
+                  >
+                    {checkoutLoading && !!priceId ? "Opening…" : tier.cta}
+                  </button>
+                </div>
+              );
+            })}
           </div>
+
+          <p className="text-center mt-10 text-sm font-semibold text-pop-ink/60">
+            All plans auto-renew · cancel anytime in your dashboard · prices in USD
+          </p>
         </div>
       </section>
 
