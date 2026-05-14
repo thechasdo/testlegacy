@@ -3,6 +3,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { usePaddleCheckout } from "@/hooks/use-paddle-checkout";
 import { useAuth } from "@/hooks/use-auth";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
+import { Reveal } from "@/components/Reveal";
 import {
   Accordion,
   AccordionContent,
@@ -313,8 +314,26 @@ function Index() {
                   <div className="size-7 sm:size-8 rounded-full bg-pop-lime border-2 border-pop-ink" />
                 </div>
                 12,000+ legacies in bloom
-              </div>
             </div>
+
+            {/* TRUST BADGES */}
+            <ul className="mt-7 sm:mt-8 flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+              {[
+                { icon: "🔒", label: "AES-256 encrypted", bg: "bg-pop-lime" },
+                { icon: "🚪", label: "Cancel anytime", bg: "bg-pop-yellow" },
+                { icon: "🛡️", label: "Privacy-first, no ads", bg: "bg-pop-pink", fg: "text-white" },
+                { icon: "♾️", label: "100-yr storage promise", bg: "bg-pop-sky" },
+              ].map((b) => (
+                <li
+                  key={b.label}
+                  className={`${b.bg} ${b.fg ?? "text-pop-ink"} border-2 border-pop-ink rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-[2px_2px_0_var(--color-pop-ink)] hover:-translate-y-0.5 transition-transform`}
+                >
+                  <span aria-hidden>{b.icon}</span>
+                  {b.label}
+                </li>
+              ))}
+            </ul>
+          </div>
           </div>
 
           {/* Hero collage */}
@@ -371,13 +390,15 @@ function Index() {
       {/* VALUE PROPS */}
       <section id="vault" className="px-6 py-32">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-5xl md:text-7xl uppercase text-pop-blue mb-4">
-            Three rules of <span className="text-pop-pink">a life kept well.</span>
-          </h2>
-          <p className="text-xl font-semibold max-w-2xl mb-16 text-pop-ink/70">
-            We didn’t build a hard drive. We built a kitchen-table archive for
-            the stuff that actually matters.
-          </p>
+          <Reveal variant="up">
+            <h2 className="font-display text-5xl md:text-7xl uppercase text-pop-blue mb-4">
+              Three rules of <span className="text-pop-pink">a life kept well.</span>
+            </h2>
+            <p className="text-xl font-semibold max-w-2xl mb-16 text-pop-ink/70">
+              We didn’t build a hard drive. We built a kitchen-table archive for
+              the stuff that actually matters.
+            </p>
+          </Reveal>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -408,18 +429,19 @@ function Index() {
                 shadow: "shadow-pop-blue",
                 Icon: Twins,
               },
-            ].map(({ num, title, body, bg, fg, shadow, Icon }) => (
-              <div
-                key={num}
-                className={`${bg} ${fg} border-2 border-pop-ink rounded-3xl p-8 ${shadow} hover:-translate-y-1 transition-transform`}
-              >
-                <div className="flex items-start justify-between mb-6">
-                  <span className="font-display text-5xl">{num}</span>
-                  <Icon className="size-14 opacity-90" />
+            ].map(({ num, title, body, bg, fg, shadow, Icon }, i) => (
+              <Reveal key={num} variant="up" delay={i * 120}>
+                <div
+                  className={`${bg} ${fg} border-2 border-pop-ink rounded-3xl p-8 ${shadow} hover:-translate-y-1 transition-transform`}
+                >
+                  <div className="flex items-start justify-between mb-6">
+                    <span className="font-display text-5xl">{num}</span>
+                    <Icon className="size-14 opacity-90" />
+                  </div>
+                  <h3 className="font-display text-3xl uppercase mb-3">{title}</h3>
+                  <p className="text-base font-semibold leading-relaxed">{body}</p>
                 </div>
-                <h3 className="font-display text-3xl uppercase mb-3">{title}</h3>
-                <p className="text-base font-semibold leading-relaxed">{body}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -435,15 +457,17 @@ function Index() {
         <Sun className="absolute top-20 right-1/3 size-16 text-pop-tangerine opacity-80" />
 
         <div className="max-w-7xl mx-auto relative">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <h2 className="font-display text-5xl md:text-7xl uppercase">
-              A peek at <span className="text-pop-yellow">the album.</span>
-            </h2>
-            <p className="text-lg font-semibold max-w-md text-pop-cream/80">
-              Real legacies live like scrapbooks — taped, tilted, slightly
-              jam-stained. Yours will too.
-            </p>
-          </div>
+          <Reveal variant="up">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+              <h2 className="font-display text-5xl md:text-7xl uppercase">
+                A peek at <span className="text-pop-yellow">the album.</span>
+              </h2>
+              <p className="text-lg font-semibold max-w-md text-pop-cream/80">
+                Real legacies live like scrapbooks — taped, tilted, slightly
+                jam-stained. Yours will too.
+              </p>
+            </div>
+          </Reveal>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
@@ -479,23 +503,24 @@ function Index() {
                 ic: "text-pop-tangerine",
                 rotate: "rotate-3 mt-6",
               },
-            ].map((c) => (
-              <div
-                key={c.title}
-                className={`bg-white text-pop-ink p-3 pb-8 border-2 border-pop-ink ${c.rotate} hover:rotate-0 transition-transform`}
-              >
+            ].map((c, i) => (
+              <Reveal key={c.title} variant="scale" delay={i * 100}>
                 <div
-                  className={`${c.bg} aspect-square flex items-center justify-center`}
+                  className={`bg-white text-pop-ink p-3 pb-8 border-2 border-pop-ink ${c.rotate} hover:rotate-0 transition-transform`}
                 >
-                  <c.Icon className={`size-20 ${c.ic}`} />
+                  <div
+                    className={`${c.bg} aspect-square flex items-center justify-center`}
+                  >
+                    <c.Icon className={`size-20 ${c.ic}`} />
+                  </div>
+                  <div className="mt-3 flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-pop-blue">
+                      {c.tag}
+                    </span>
+                  </div>
+                  <p className="font-bold text-sm mt-1">{c.title}</p>
                 </div>
-                <div className="mt-3 flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-pop-blue">
-                    {c.tag}
-                  </span>
-                </div>
-                <p className="font-bold text-sm mt-1">{c.title}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -504,14 +529,16 @@ function Index() {
       {/* PRICING */}
       <section id="pricing" className="px-6 py-32">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-5xl md:text-7xl uppercase text-pop-blue">
-              Pick your <span className="text-pop-pink">volume.</span>
-            </h2>
-            <p className="mt-4 text-lg font-semibold text-pop-ink/70">
-              Five tiers. Auto-renews so the party never stops. Yearly saves you ~20%.
-            </p>
-          </div>
+          <Reveal variant="up">
+            <div className="text-center mb-12">
+              <h2 className="font-display text-5xl md:text-7xl uppercase text-pop-blue">
+                Pick your <span className="text-pop-pink">volume.</span>
+              </h2>
+              <p className="mt-4 text-lg font-semibold text-pop-ink/70">
+                Five tiers. Auto-renews so the party never stops. Yearly saves you ~20%.
+              </p>
+            </div>
+          </Reveal>
 
           {/* Billing toggle */}
           <div className="flex justify-center mb-14">
