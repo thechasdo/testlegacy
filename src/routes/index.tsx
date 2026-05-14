@@ -457,15 +457,17 @@ function Index() {
         <Sun className="absolute top-20 right-1/3 size-16 text-pop-tangerine opacity-80" />
 
         <div className="max-w-7xl mx-auto relative">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <h2 className="font-display text-5xl md:text-7xl uppercase">
-              A peek at <span className="text-pop-yellow">the album.</span>
-            </h2>
-            <p className="text-lg font-semibold max-w-md text-pop-cream/80">
-              Real legacies live like scrapbooks — taped, tilted, slightly
-              jam-stained. Yours will too.
-            </p>
-          </div>
+          <Reveal variant="up">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+              <h2 className="font-display text-5xl md:text-7xl uppercase">
+                A peek at <span className="text-pop-yellow">the album.</span>
+              </h2>
+              <p className="text-lg font-semibold max-w-md text-pop-cream/80">
+                Real legacies live like scrapbooks — taped, tilted, slightly
+                jam-stained. Yours will too.
+              </p>
+            </div>
+          </Reveal>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
@@ -501,23 +503,24 @@ function Index() {
                 ic: "text-pop-tangerine",
                 rotate: "rotate-3 mt-6",
               },
-            ].map((c) => (
-              <div
-                key={c.title}
-                className={`bg-white text-pop-ink p-3 pb-8 border-2 border-pop-ink ${c.rotate} hover:rotate-0 transition-transform`}
-              >
+            ].map((c, i) => (
+              <Reveal key={c.title} variant="scale" delay={i * 100}>
                 <div
-                  className={`${c.bg} aspect-square flex items-center justify-center`}
+                  className={`bg-white text-pop-ink p-3 pb-8 border-2 border-pop-ink ${c.rotate} hover:rotate-0 transition-transform`}
                 >
-                  <c.Icon className={`size-20 ${c.ic}`} />
+                  <div
+                    className={`${c.bg} aspect-square flex items-center justify-center`}
+                  >
+                    <c.Icon className={`size-20 ${c.ic}`} />
+                  </div>
+                  <div className="mt-3 flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-pop-blue">
+                      {c.tag}
+                    </span>
+                  </div>
+                  <p className="font-bold text-sm mt-1">{c.title}</p>
                 </div>
-                <div className="mt-3 flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-pop-blue">
-                    {c.tag}
-                  </span>
-                </div>
-                <p className="font-bold text-sm mt-1">{c.title}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
