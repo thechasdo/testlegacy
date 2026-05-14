@@ -1,4 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { usePaddleCheckout } from "@/hooks/use-paddle-checkout";
+import { useAuth } from "@/hooks/use-auth";
+import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 export const Route = createFileRoute("/")({
   component: Index,
