@@ -422,8 +422,12 @@ function Index() {
                 <li>👯 Unlimited future-sends</li>
                 <li>✨ Collaborative family albums</li>
               </ul>
-              <button className="mt-8 py-3 rounded-full bg-white text-pop-pink border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow hover:text-pop-ink transition-colors">
-                Choose Collector
+              <button
+                onClick={() => handleSubscribe("collector_monthly")}
+                disabled={checkoutLoading}
+                className="mt-8 py-3 rounded-full bg-white text-pop-pink border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow hover:text-pop-ink transition-colors disabled:opacity-60"
+              >
+                {checkoutLoading ? "Opening…" : "Choose Collector"}
               </button>
             </div>
 
