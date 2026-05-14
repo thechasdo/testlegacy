@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { usePaddleCheckout } from "@/hooks/use-paddle-checkout";
 import { useAuth } from "@/hooks/use-auth";
@@ -86,18 +87,147 @@ function Sun({ className = "" }: { className?: string }) {
 
 /* ---------- page ---------- */
 
+type BillingCycle = "monthly" | "yearly";
+
+const TIERS = [
+  {
+    id: "keepsake",
+    name: "Keepsake",
+    tagline: "Get the party started.",
+    monthly: 0,
+    yearly: 0,
+    monthlyPriceId: null,
+    yearlyPriceId: null,
+    accent: "bg-white",
+    text: "text-pop-ink",
+    shadow: "shadow-pop-yellow",
+    button: "border-pop-ink hover:bg-pop-yellow",
+    cta: "Start free",
+    features: [
+      "🐬 1 GB of memories",
+      "🐘 2 trusted heirs",
+      "👯 3 future-send letters",
+      "✨ Public profile page",
+    ],
+    addons: ["+ Custom domain ($5/mo)"],
+  },
+  {
+    id: "snapshot",
+    name: "Snapshot",
+    tagline: "A pocketful of polaroids.",
+    monthly: 9.99,
+    yearly: 95.9,
+    monthlyPriceId: "snapshot_monthly",
+    yearlyPriceId: "snapshot_yearly",
+    accent: "bg-pop-sky",
+    text: "text-pop-ink",
+    shadow: "shadow-pop-pink",
+    button: "border-pop-ink hover:bg-pop-pink hover:text-white",
+    cta: "Get Snapshot",
+    features: [
+      "🐬 10 GB of memories",
+      "🐘 5 trusted heirs",
+      "👯 25 future-send letters",
+      "✨ Voice memos (HQ)",
+      "🌞 Custom domain included",
+    ],
+    addons: ["+ Extra 50 GB ($4/mo)", "+ Annual photo zine ($25/yr)"],
+  },
+  {
+    id: "collector",
+    name: "Collector",
+    tagline: "For a lifetime of stories.",
+    monthly: 19.99,
+    yearly: 191.9,
+    monthlyPriceId: "collector_v2_monthly",
+    yearlyPriceId: "collector_v2_yearly",
+    accent: "bg-pop-pink",
+    text: "text-white",
+    shadow: "shadow-[10px_10px_0_var(--color-pop-blue)]",
+    button: "bg-white text-pop-pink border-pop-ink hover:bg-pop-yellow hover:text-pop-ink",
+    cta: "Choose Collector",
+    featured: true,
+    features: [
+      "🐬 100 GB + voice memos",
+      "🐘 Unlimited heirs",
+      "👯 Unlimited future-sends",
+      "✨ Collaborative family albums",
+      "🌞 Custom domain + email",
+      "🎀 Inline scrapbook editor",
+    ],
+    addons: ["+ Extra 500 GB ($10/mo)", "+ Video vault ($8/mo)"],
+  },
+  {
+    id: "archivist",
+    name: "Archivist",
+    tagline: "Big vault energy.",
+    monthly: 34.99,
+    yearly: 335.9,
+    monthlyPriceId: "archivist_monthly",
+    yearlyPriceId: "archivist_yearly",
+    accent: "bg-pop-yellow",
+    text: "text-pop-ink",
+    shadow: "shadow-pop-blue",
+    button: "border-pop-ink bg-pop-ink text-white hover:bg-pop-pink",
+    cta: "Become Archivist",
+    features: [
+      "🐬 500 GB + 4K video memos",
+      "🐘 Unlimited heirs + co-curators",
+      "👯 Smart future-sends w/ triggers",
+      "✨ Family branching trees",
+      "🌞 Multi-domain support",
+      "🎀 Auto-tagging & search",
+      "🐠 Annual printed photo book",
+    ],
+    addons: ["+ Concierge digitization ($15/mo)", "+ Heirloom NFC tags ($30/yr)"],
+  },
+  {
+    id: "curator",
+    name: "Curator",
+    tagline: "The full historian regalia.",
+    monthly: 49.99,
+    yearly: 479.9,
+    monthlyPriceId: "curator_v2_monthly",
+    yearlyPriceId: "curator_v2_yearly",
+    accent: "bg-pop-lime",
+    text: "text-pop-ink",
+    shadow: "shadow-[10px_10px_0_var(--color-pop-tangerine)]",
+    button: "border-pop-ink bg-pop-blue text-white hover:bg-pop-pink",
+    cta: "Become Curator",
+    features: [
+      "🐬 1 TB high-res video vault",
+      "🐘 Concierge digitization included",
+      "👯 White-glove future-send concierge",
+      "✨ Annual printed photo book",
+      "🌞 Custom branding + multi-domain",
+      "🎀 Heirloom NFC tags (4/yr)",
+      "🐠 Dedicated archivist contact",
+      "🦩 Priority forever-storage guarantee",
+    ],
+    addons: ["+ Family historian onsite visit ($499/yr)"],
+  },
+] as const;
+
 function Index() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { openCheckout, loading: checkoutLoading } = usePaddleCheckout();
+  const [cycle, setCycle] = useState<BillingCycle>("yearly");
 
-  const handleSubscribe = (priceId: string) => {
+  const handleSubscribe = (priceId: string | null) => {
+    if (!priceId) {
+      navigate({ to: user ? "/dashboard" : "/login" });
+      return;
+    }
     if (!user) {
       navigate({ to: "/login" });
       return;
     }
     openCheckout({ priceId, userId: user.id, customerEmail: user.email });
   };
+
+  const fmt = (n: number) =>
+    n === 0 ? "$0" : `$${n.toFixed(n % 1 === 0 ? 0 : 2)}`;
 
   return (
     <div className="min-h-screen bg-pop-cream text-pop-ink overflow-x-hidden selection:bg-pop-pink selection:text-white">
@@ -368,112 +498,125 @@ function Index() {
       {/* PRICING */}
       <section id="pricing" className="px-6 py-32">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="font-display text-5xl md:text-7xl uppercase text-pop-blue">
               Pick your <span className="text-pop-pink">volume.</span>
             </h2>
             <p className="mt-4 text-lg font-semibold text-pop-ink/70">
-              Plans that grow with you. Add-ons for the maximalists.
+              Five tiers. Auto-renews so the party never stops. Yearly saves you ~20%.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Tier 1 */}
-            <div className="bg-white border-2 border-pop-ink rounded-3xl p-10 flex flex-col shadow-pop-yellow">
-              <span className="font-display text-2xl text-pop-blue uppercase">
-                Keepsake
-              </span>
-              <p className="text-sm font-semibold text-pop-ink/60 mt-1">
-                For getting started.
-              </p>
-              <div className="font-display text-6xl text-pop-ink mt-6">
-                $0
-                <span className="text-lg font-sans text-pop-ink/40">/mo</span>
-              </div>
-              <ul className="mt-8 space-y-3 flex-1 font-semibold text-sm">
-                <li>🐬 1 GB of memories</li>
-                <li>🐘 2 trusted heirs</li>
-                <li>👯 3 future-send letters</li>
-              </ul>
+          {/* Billing toggle */}
+          <div className="flex justify-center mb-14">
+            <div className="inline-flex items-center gap-1 bg-white border-2 border-pop-ink rounded-full p-1 shadow-pop-pink">
               <button
-                onClick={() => navigate({ to: user ? "/dashboard" : "/login" })}
-                className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow transition-colors"
+                onClick={() => setCycle("monthly")}
+                className={`px-5 py-2 rounded-full font-bold text-sm uppercase tracking-tight transition-colors ${
+                  cycle === "monthly"
+                    ? "bg-pop-blue text-white"
+                    : "text-pop-ink hover:bg-pop-yellow"
+                }`}
               >
-                Start free
+                Monthly
               </button>
-            </div>
-
-            {/* Tier 2 - featured */}
-            <div className="bg-pop-pink text-white border-2 border-pop-ink rounded-3xl p-10 flex flex-col shadow-[10px_10px_0_var(--color-pop-blue)] md:scale-105 relative">
-              <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-pop-yellow text-pop-ink border-2 border-pop-ink px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
-                Most loved
-              </span>
-              <span className="font-display text-2xl uppercase">Collector</span>
-              <p className="text-sm font-semibold text-white/80 mt-1">
-                For a lifetime of stories.
-              </p>
-              <div className="font-display text-6xl mt-6">
-                $12
-                <span className="text-lg font-sans text-white/60">/mo</span>
-              </div>
-              <ul className="mt-8 space-y-3 flex-1 font-semibold text-sm">
-                <li>🐬 100 GB + voice memos</li>
-                <li>🐘 Unlimited heirs</li>
-                <li>👯 Unlimited future-sends</li>
-                <li>✨ Collaborative family albums</li>
-              </ul>
               <button
-                onClick={() => handleSubscribe("collector_monthly")}
-                disabled={checkoutLoading}
-                className="mt-8 py-3 rounded-full bg-white text-pop-pink border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-yellow hover:text-pop-ink transition-colors disabled:opacity-60"
+                onClick={() => setCycle("yearly")}
+                className={`px-5 py-2 rounded-full font-bold text-sm uppercase tracking-tight transition-colors flex items-center gap-2 ${
+                  cycle === "yearly"
+                    ? "bg-pop-blue text-white"
+                    : "text-pop-ink hover:bg-pop-yellow"
+                }`}
               >
-                {checkoutLoading ? "Opening…" : "Choose Collector"}
-              </button>
-            </div>
-
-            {/* Tier 3 */}
-            <div className="bg-white border-2 border-pop-ink rounded-3xl p-10 flex flex-col shadow-pop-lime">
-              <span className="font-display text-2xl text-pop-blue uppercase">
-                Curator
-              </span>
-              <p className="text-sm font-semibold text-pop-ink/60 mt-1">
-                For the family historian.
-              </p>
-              <div className="font-display text-6xl text-pop-ink mt-6">
-                $29
-                <span className="text-lg font-sans text-pop-ink/40">/mo</span>
-              </div>
-              <ul className="mt-8 space-y-3 flex-1 font-semibold text-sm">
-                <li>🐬 1 TB high-res video vault</li>
-                <li>🐘 Concierge digitization</li>
-                <li>👯 Annual printed photo book</li>
-              </ul>
-              <button
-                onClick={() => handleSubscribe("curator_monthly")}
-                disabled={checkoutLoading}
-                className="mt-8 py-3 rounded-full border-2 border-pop-ink font-bold uppercase text-sm hover:bg-pop-lime transition-colors disabled:opacity-60"
-              >
-                {checkoutLoading ? "Opening…" : "Become Curator"}
+                Yearly
+                <span className="bg-pop-lime text-pop-ink border border-pop-ink px-2 py-0.5 rounded-full text-[10px]">
+                  save 20%
+                </span>
               </button>
             </div>
           </div>
 
-          {/* add-ons */}
-          <div className="mt-16 flex flex-wrap gap-4 justify-center">
-            {[
-              { label: "Custom domain · +$5/mo", bg: "bg-pop-yellow", r: "rotate-2" },
-              { label: "Video vault · +$8/mo", bg: "bg-pop-pink text-white", r: "-rotate-2" },
-              { label: "Extra 500 GB · +$10/mo", bg: "bg-pop-lime", r: "rotate-1" },
-              { label: "Annual photo book · +$45/yr", bg: "bg-pop-sky", r: "-rotate-3" },
-            ].map((a) => (
-              <span
-                key={a.label}
-                className={`${a.bg} ${a.r} border-2 border-pop-ink px-5 py-2 rounded-full font-bold text-sm uppercase tracking-tight`}
-              >
-                {a.label}
-              </span>
-            ))}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {TIERS.map((tier) => {
+              const isYearly = cycle === "yearly";
+              const priceId = isYearly ? tier.yearlyPriceId : tier.monthlyPriceId;
+              const isFree = tier.monthly === 0;
+              const monthlyEquiv = isYearly && !isFree ? tier.yearly / 12 : tier.monthly;
+              const yearlyTotal = tier.yearly;
+              const featured = "featured" in tier && tier.featured;
+
+              return (
+                <div
+                  key={tier.id}
+                  className={`${tier.accent} ${tier.text} border-2 border-pop-ink rounded-3xl p-7 flex flex-col ${tier.shadow} ${
+                    featured ? "lg:-translate-y-4 relative" : "relative"
+                  } hover:-translate-y-1 transition-transform`}
+                >
+                  {featured && (
+                    <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-pop-yellow text-pop-ink border-2 border-pop-ink px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">
+                      Most loved
+                    </span>
+                  )}
+                  <span className="font-display text-2xl uppercase">{tier.name}</span>
+                  <p className={`text-xs font-semibold mt-1 ${featured ? "text-white/80" : "text-pop-ink/60"}`}>
+                    {tier.tagline}
+                  </p>
+
+                  <div className="mt-5">
+                    <div className="font-display text-5xl leading-none">
+                      {fmt(monthlyEquiv)}
+                      <span className={`text-sm font-sans ml-1 ${featured ? "text-white/70" : "text-pop-ink/50"}`}>
+                        /mo
+                      </span>
+                    </div>
+                    <div className={`mt-2 text-[11px] font-bold uppercase tracking-widest ${featured ? "text-white/80" : "text-pop-ink/60"}`}>
+                      {isFree
+                        ? "Forever free"
+                        : isYearly
+                        ? `Billed ${fmt(yearlyTotal)}/yr · auto-renews`
+                        : `${fmt(tier.monthly)}/mo · auto-renews`}
+                    </div>
+                    {isYearly && !isFree && (
+                      <div className="mt-1 inline-block bg-pop-lime text-pop-ink border border-pop-ink px-2 py-0.5 rounded-full text-[10px] font-bold uppercase">
+                        save {fmt(tier.monthly * 12 - tier.yearly)}/yr
+                      </div>
+                    )}
+                  </div>
+
+                  <ul className="mt-6 space-y-2 flex-1 font-semibold text-sm">
+                    {tier.features.map((f) => (
+                      <li key={f}>{f}</li>
+                    ))}
+                  </ul>
+
+                  {tier.addons.length > 0 && (
+                    <div className={`mt-5 pt-4 border-t-2 border-dashed ${featured ? "border-white/40" : "border-pop-ink/20"}`}>
+                      <div className={`text-[10px] font-bold uppercase tracking-widest mb-2 ${featured ? "text-white/80" : "text-pop-ink/50"}`}>
+                        Add-ons
+                      </div>
+                      <ul className="space-y-1 text-xs font-semibold">
+                        {tier.addons.map((a) => (
+                          <li key={a}>{a}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <button
+                    onClick={() => handleSubscribe(priceId)}
+                    disabled={checkoutLoading && !!priceId}
+                    className={`mt-6 py-3 rounded-full border-2 font-bold uppercase text-sm transition-colors disabled:opacity-60 ${tier.button}`}
+                  >
+                    {checkoutLoading && !!priceId ? "Opening…" : tier.cta}
+                  </button>
+                </div>
+              );
+            })}
           </div>
+
+          <p className="text-center mt-10 text-sm font-semibold text-pop-ink/60">
+            All plans auto-renew · cancel anytime in your dashboard · prices in USD
+          </p>
         </div>
       </section>
 
