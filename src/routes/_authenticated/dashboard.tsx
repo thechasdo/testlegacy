@@ -104,7 +104,7 @@ function Dashboard() {
         {isLoading && <p className="font-bold">Loading…</p>}
         {data?.legacies.length === 0 && (
           <p className="font-semibold text-pop-ink/60 col-span-full">
-            No legacies yet. Make your first one ↑
+            No souls yet. Make your first one ↑
           </p>
         )}
         {data?.legacies.map((l) => (
