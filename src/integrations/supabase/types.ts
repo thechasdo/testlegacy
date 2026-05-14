@@ -50,6 +50,53 @@ export type Database = {
         }
         Relationships: []
       }
+      legacy_shares: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          label: string | null
+          legacy_id: string
+          revoked_at: string | null
+          token: string
+          updated_at: string
+          user_id: string
+          view_count: number
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          label?: string | null
+          legacy_id: string
+          revoked_at?: string | null
+          token: string
+          updated_at?: string
+          user_id: string
+          view_count?: number
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          label?: string | null
+          legacy_id?: string
+          revoked_at?: string | null
+          token?: string
+          updated_at?: string
+          user_id?: string
+          view_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "legacy_shares_legacy_id_fkey"
+            columns: ["legacy_id"]
+            isOneToOne: false
+            referencedRelation: "legacies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       memories: {
         Row: {
           body: string | null
