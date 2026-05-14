@@ -87,18 +87,147 @@ function Sun({ className = "" }: { className?: string }) {
 
 /* ---------- page ---------- */
 
+type BillingCycle = "monthly" | "yearly";
+
+const TIERS = [
+  {
+    id: "keepsake",
+    name: "Keepsake",
+    tagline: "Get the party started.",
+    monthly: 0,
+    yearly: 0,
+    monthlyPriceId: null,
+    yearlyPriceId: null,
+    accent: "bg-white",
+    text: "text-pop-ink",
+    shadow: "shadow-pop-yellow",
+    button: "border-pop-ink hover:bg-pop-yellow",
+    cta: "Start free",
+    features: [
+      "🐬 1 GB of memories",
+      "🐘 2 trusted heirs",
+      "👯 3 future-send letters",
+      "✨ Public profile page",
+    ],
+    addons: ["+ Custom domain ($5/mo)"],
+  },
+  {
+    id: "snapshot",
+    name: "Snapshot",
+    tagline: "A pocketful of polaroids.",
+    monthly: 9.99,
+    yearly: 95.9,
+    monthlyPriceId: "snapshot_monthly",
+    yearlyPriceId: "snapshot_yearly",
+    accent: "bg-pop-sky",
+    text: "text-pop-ink",
+    shadow: "shadow-pop-pink",
+    button: "border-pop-ink hover:bg-pop-pink hover:text-white",
+    cta: "Get Snapshot",
+    features: [
+      "🐬 10 GB of memories",
+      "🐘 5 trusted heirs",
+      "👯 25 future-send letters",
+      "✨ Voice memos (HQ)",
+      "🌞 Custom domain included",
+    ],
+    addons: ["+ Extra 50 GB ($4/mo)", "+ Annual photo zine ($25/yr)"],
+  },
+  {
+    id: "collector",
+    name: "Collector",
+    tagline: "For a lifetime of stories.",
+    monthly: 19.99,
+    yearly: 191.9,
+    monthlyPriceId: "collector_v2_monthly",
+    yearlyPriceId: "collector_v2_yearly",
+    accent: "bg-pop-pink",
+    text: "text-white",
+    shadow: "shadow-[10px_10px_0_var(--color-pop-blue)]",
+    button: "bg-white text-pop-pink border-pop-ink hover:bg-pop-yellow hover:text-pop-ink",
+    cta: "Choose Collector",
+    featured: true,
+    features: [
+      "🐬 100 GB + voice memos",
+      "🐘 Unlimited heirs",
+      "👯 Unlimited future-sends",
+      "✨ Collaborative family albums",
+      "🌞 Custom domain + email",
+      "🎀 Inline scrapbook editor",
+    ],
+    addons: ["+ Extra 500 GB ($10/mo)", "+ Video vault ($8/mo)"],
+  },
+  {
+    id: "archivist",
+    name: "Archivist",
+    tagline: "Big vault energy.",
+    monthly: 34.99,
+    yearly: 335.9,
+    monthlyPriceId: "archivist_monthly",
+    yearlyPriceId: "archivist_yearly",
+    accent: "bg-pop-yellow",
+    text: "text-pop-ink",
+    shadow: "shadow-pop-blue",
+    button: "border-pop-ink bg-pop-ink text-white hover:bg-pop-pink",
+    cta: "Become Archivist",
+    features: [
+      "🐬 500 GB + 4K video memos",
+      "🐘 Unlimited heirs + co-curators",
+      "👯 Smart future-sends w/ triggers",
+      "✨ Family branching trees",
+      "🌞 Multi-domain support",
+      "🎀 Auto-tagging & search",
+      "🐠 Annual printed photo book",
+    ],
+    addons: ["+ Concierge digitization ($15/mo)", "+ Heirloom NFC tags ($30/yr)"],
+  },
+  {
+    id: "curator",
+    name: "Curator",
+    tagline: "The full historian regalia.",
+    monthly: 49.99,
+    yearly: 479.9,
+    monthlyPriceId: "curator_v2_monthly",
+    yearlyPriceId: "curator_v2_yearly",
+    accent: "bg-pop-lime",
+    text: "text-pop-ink",
+    shadow: "shadow-[10px_10px_0_var(--color-pop-tangerine)]",
+    button: "border-pop-ink bg-pop-blue text-white hover:bg-pop-pink",
+    cta: "Become Curator",
+    features: [
+      "🐬 1 TB high-res video vault",
+      "🐘 Concierge digitization included",
+      "👯 White-glove future-send concierge",
+      "✨ Annual printed photo book",
+      "🌞 Custom branding + multi-domain",
+      "🎀 Heirloom NFC tags (4/yr)",
+      "🐠 Dedicated archivist contact",
+      "🦩 Priority forever-storage guarantee",
+    ],
+    addons: ["+ Family historian onsite visit ($499/yr)"],
+  },
+] as const;
+
 function Index() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { openCheckout, loading: checkoutLoading } = usePaddleCheckout();
+  const [cycle, setCycle] = useState<BillingCycle>("yearly");
 
-  const handleSubscribe = (priceId: string) => {
+  const handleSubscribe = (priceId: string | null) => {
+    if (!priceId) {
+      navigate({ to: user ? "/dashboard" : "/login" });
+      return;
+    }
     if (!user) {
       navigate({ to: "/login" });
       return;
     }
     openCheckout({ priceId, userId: user.id, customerEmail: user.email });
   };
+
+  const fmt = (n: number) =>
+    n === 0 ? "$0" : `$${n.toFixed(n % 1 === 0 ? 0 : 2)}`;
 
   return (
     <div className="min-h-screen bg-pop-cream text-pop-ink overflow-x-hidden selection:bg-pop-pink selection:text-white">
