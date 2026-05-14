@@ -246,7 +246,7 @@ function Index() {
             <Sparkle className="size-4 text-pop-yellow" />
           </div>
           <span className="font-display text-2xl text-pop-blue tracking-tight">
-            chasdo
+            Digital Soul
           </span>
         </div>
         <div className="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest">
