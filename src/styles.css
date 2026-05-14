@@ -4,6 +4,22 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Bubblegum-pop nostalgia: bold blue lead + clashing pops of pink, yellow, lime, tangerine */
+@theme {
+  --font-display: "Bungee", "Alfa Slab One", Impact, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+
+  --color-pop-blue: oklch(0.62 0.21 255);       /* electric cobalt */
+  --color-pop-blue-deep: oklch(0.42 0.20 260);
+  --color-pop-sky: oklch(0.88 0.10 240);        /* light sky */
+  --color-pop-pink: oklch(0.70 0.25 350);       /* hot pink */
+  --color-pop-yellow: oklch(0.90 0.18 95);      /* sunshine */
+  --color-pop-lime: oklch(0.86 0.21 130);       /* zingy lime */
+  --color-pop-tangerine: oklch(0.74 0.19 50);   /* tangerine */
+  --color-pop-cream: oklch(0.985 0.012 95);     /* warm paper */
+  --color-pop-ink: oklch(0.18 0.04 260);
+}
+
 /*
  * Design system definition.
  *
