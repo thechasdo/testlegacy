@@ -181,7 +181,7 @@ function InvitePage() {
         </div>
 
         <p className="mt-8 text-center text-xs font-bold uppercase text-pop-ink/50">
-          Delivered via Digital Soul
+          Delivered via Soul Legacy
         </p>
       </div>
     </div>
