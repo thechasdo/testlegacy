@@ -240,7 +240,7 @@ export function InviteSoulPanel({ legacyId }: { legacyId: string }) {
                   href={`mailto:${encodeURIComponent(
                     inv.recipient_email,
                   )}?subject=${encodeURIComponent(
-                    "You've been invited to a Digital Soul",
+                    "You've been invited to a Soul Legacy",
                   )}&body=${encodeURIComponent(
                     `${inv.message ? inv.message + "\n\n" : ""}Open your invitation: ${url}`,
                   )}`}
