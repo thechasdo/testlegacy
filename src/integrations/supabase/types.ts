@@ -50,6 +50,57 @@ export type Database = {
         }
         Relationships: []
       }
+      legacy_invitations: {
+        Row: {
+          accepted_at: string | null
+          created_at: string
+          expires_at: string | null
+          id: string
+          legacy_id: string
+          message: string | null
+          permission: Database["public"]["Enums"]["invite_permission"]
+          recipient_email: string
+          recipient_name: string | null
+          revoked_at: string | null
+          token: string
+          updated_at: string
+          user_id: string
+          view_count: number
+        }
+        Insert: {
+          accepted_at?: string | null
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          legacy_id: string
+          message?: string | null
+          permission?: Database["public"]["Enums"]["invite_permission"]
+          recipient_email: string
+          recipient_name?: string | null
+          revoked_at?: string | null
+          token: string
+          updated_at?: string
+          user_id: string
+          view_count?: number
+        }
+        Update: {
+          accepted_at?: string | null
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          legacy_id?: string
+          message?: string | null
+          permission?: Database["public"]["Enums"]["invite_permission"]
+          recipient_email?: string
+          recipient_name?: string | null
+          revoked_at?: string | null
+          token?: string
+          updated_at?: string
+          user_id?: string
+          view_count?: number
+        }
+        Relationships: []
+      }
       legacy_shares: {
         Row: {
           created_at: string
@@ -259,6 +310,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      invite_permission: "read" | "export"
       legacy_plan: "keepsake" | "collector" | "curator"
       memory_kind: "photo" | "voice" | "letter" | "recipe" | "document"
     }
@@ -389,6 +441,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
+      invite_permission: ["read", "export"],
       legacy_plan: ["keepsake", "collector", "curator"],
       memory_kind: ["photo", "voice", "letter", "recipe", "document"],
     },
