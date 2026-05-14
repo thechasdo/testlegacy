@@ -268,15 +268,15 @@ function Index() {
       </nav>
 
       {/* HERO */}
-      <header className="relative px-6 pt-12 pb-32">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 relative z-10">
-            <span className="inline-flex items-center gap-2 bg-pop-yellow border-2 border-pop-ink px-3 py-1 rounded-full font-bold text-xs uppercase tracking-widest mb-6">
+      <header className="relative px-4 sm:px-6 pt-8 sm:pt-12 pb-20 sm:pb-28 lg:pb-32">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <div className="lg:col-span-7 relative z-10 text-center lg:text-left">
+            <span className="inline-flex items-center gap-2 bg-pop-yellow border-2 border-pop-ink px-3 py-1 rounded-full font-bold text-[11px] sm:text-xs uppercase tracking-widest mb-5 sm:mb-6">
               <Sparkle className="size-3 text-pop-pink" /> A vault for the
               loud, living, real you
             </span>
 
-            <h1 className="font-display text-[clamp(3.5rem,9vw,7.5rem)] uppercase leading-[0.85] text-pop-blue">
+            <h1 className="font-display text-[clamp(2.75rem,11vw,7.5rem)] uppercase leading-[0.85] text-pop-blue">
               Live{" "}
               <span className="text-pop-pink italic inline-block animate-wiggle origin-bottom">
                 Forever
@@ -292,25 +292,25 @@ function Index() {
               </span>
             </h1>
 
-            <p className="mt-10 max-w-xl text-xl font-semibold leading-relaxed text-pop-ink/80">
+            <p className="mt-6 sm:mt-10 max-w-xl mx-auto lg:mx-0 text-base sm:text-xl font-semibold leading-relaxed text-pop-ink/80">
               chasdo is a technicolor time capsule for your stories, voice
               notes, recipes, and inside jokes. Not a graveyard — a{" "}
               <span className="bg-pop-lime px-1">backyard party</span> that
               lasts a hundred years.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4 items-center">
+            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap gap-5 sm:gap-4 items-center justify-center lg:justify-start">
               <a
                 href="#pricing"
-                className="bg-pop-pink text-white text-lg px-10 py-4 rounded-2xl font-display uppercase border-2 border-pop-ink shadow-[6px_6px_0_var(--color-pop-blue)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-transform"
+                className="bg-pop-pink text-white text-base sm:text-lg px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl font-display uppercase border-2 border-pop-ink shadow-[6px_6px_0_var(--color-pop-blue)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-transform"
               >
                 Start Your Capsule
               </a>
-              <div className="flex items-center gap-3 text-sm font-bold">
+              <div className="flex items-center gap-3 text-xs sm:text-sm font-bold">
                 <div className="flex -space-x-2">
-                  <div className="size-8 rounded-full bg-pop-yellow border-2 border-pop-ink" />
-                  <div className="size-8 rounded-full bg-pop-pink border-2 border-pop-ink" />
-                  <div className="size-8 rounded-full bg-pop-lime border-2 border-pop-ink" />
+                  <div className="size-7 sm:size-8 rounded-full bg-pop-yellow border-2 border-pop-ink" />
+                  <div className="size-7 sm:size-8 rounded-full bg-pop-pink border-2 border-pop-ink" />
+                  <div className="size-7 sm:size-8 rounded-full bg-pop-lime border-2 border-pop-ink" />
                 </div>
                 12,000+ legacies in bloom
               </div>
@@ -318,31 +318,31 @@ function Index() {
           </div>
 
           {/* Hero collage */}
-          <div className="lg:col-span-5 relative h-[420px] sm:h-[520px]">
-            <div className="absolute top-0 right-4 rotate-6 z-20 bg-white p-3 pb-10 border-2 border-pop-ink shadow-pop-pink">
-              <div className="w-56 aspect-square bg-pop-sky flex items-center justify-center text-pop-blue">
-                <Dolphin className="size-32" />
+          <div className="lg:col-span-5 relative h-[340px] sm:h-[460px] lg:h-[520px] mt-4 lg:mt-0 mx-auto w-full max-w-md lg:max-w-none">
+            <div className="absolute top-0 right-2 sm:right-4 rotate-6 z-20 bg-white p-2 sm:p-3 pb-8 sm:pb-10 border-2 border-pop-ink shadow-pop-pink">
+              <div className="w-36 sm:w-52 lg:w-56 aspect-square bg-pop-sky flex items-center justify-center text-pop-blue">
+                <Dolphin className="size-20 sm:size-28 lg:size-32" />
               </div>
-              <p className="mt-2 font-bold text-sm">Hawaii, summer ’03 🐬</p>
+              <p className="mt-2 font-bold text-xs sm:text-sm">Hawaii, summer ’03 🐬</p>
             </div>
 
-            <div className="absolute bottom-8 left-0 -rotate-6 z-30 bg-white p-3 pb-10 border-2 border-pop-ink shadow-pop-blue">
-              <div className="w-52 aspect-square bg-pop-yellow flex items-center justify-center text-pop-tangerine">
-                <Elephant className="size-32" />
+            <div className="absolute bottom-4 sm:bottom-8 left-0 -rotate-6 z-30 bg-white p-2 sm:p-3 pb-8 sm:pb-10 border-2 border-pop-ink shadow-pop-blue">
+              <div className="w-32 sm:w-48 lg:w-52 aspect-square bg-pop-yellow flex items-center justify-center text-pop-tangerine">
+                <Elephant className="size-20 sm:size-28 lg:size-32" />
               </div>
-              <p className="mt-2 font-bold text-sm">Zoo trip with Pop 🐘</p>
+              <p className="mt-2 font-bold text-xs sm:text-sm">Zoo trip with Pop 🐘</p>
             </div>
 
-            <div className="absolute bottom-32 right-0 rotate-3 z-10 bg-white p-3 pb-10 border-2 border-pop-ink shadow-pop-yellow">
-              <div className="w-48 aspect-square bg-pop-pink/30 flex items-center justify-center text-pop-pink">
-                <Twins className="size-32" />
+            <div className="absolute bottom-24 sm:bottom-32 right-0 rotate-3 z-10 bg-white p-2 sm:p-3 pb-8 sm:pb-10 border-2 border-pop-ink shadow-pop-yellow hidden sm:block">
+              <div className="w-32 sm:w-44 lg:w-48 aspect-square bg-pop-pink/30 flex items-center justify-center text-pop-pink">
+                <Twins className="size-20 sm:size-28 lg:size-32" />
               </div>
-              <p className="mt-2 font-bold text-sm">Me &amp; Mara, age 6 👯</p>
+              <p className="mt-2 font-bold text-xs sm:text-sm">Me &amp; Mara, age 6 👯</p>
             </div>
 
             {/* deco */}
-            <Sun className="absolute -top-6 -left-2 size-20 text-pop-yellow animate-float-y" />
-            <Sparkle className="absolute bottom-2 right-10 size-8 text-pop-pink animate-wiggle" />
+            <Sun className="absolute -top-4 -left-1 sm:-top-6 sm:-left-2 size-14 sm:size-20 text-pop-yellow animate-float-y" />
+            <Sparkle className="absolute bottom-0 right-6 sm:bottom-2 sm:right-10 size-6 sm:size-8 text-pop-pink animate-wiggle" />
           </div>
         </div>
       </header>
