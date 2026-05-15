@@ -243,7 +243,7 @@ function Index() {
       <nav className="relative z-20 max-w-7xl mx-auto flex items-center justify-between px-6 py-6">
         <div className="flex items-center gap-3">
           <div className="size-10 rounded-2xl bg-pop-pink border-[3px] border-pop-ink flex items-center justify-center rotate-3 shadow-[3px_3px_0_0_var(--color-pop-ink)]">
-            <Sparkle className="size-5 text-white" fill="white" />
+            <Sparkle className="size-5 text-white" />
           </div>
           <span className="font-display text-2xl text-pop-ink tracking-tighter uppercase leading-none">
             Forever<span className="text-pop-pink">You</span>
