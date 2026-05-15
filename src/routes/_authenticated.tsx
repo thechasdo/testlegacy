@@ -20,7 +20,7 @@ function AuthedShell() {
       <nav className="border-b-2 border-pop-ink bg-white">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link to="/dashboard" className="font-display text-2xl text-pop-blue">
-            Soul Legacy
+            Forever Digital
           </Link>
           <div className="flex items-center gap-4">
             <span className="hidden sm:inline text-sm font-bold text-pop-ink/70">

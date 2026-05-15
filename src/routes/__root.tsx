@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Soul Legacy is a vibrant vault for your soul. Save your stories, voice notes, photos and the messy living parts of you — for the people who'll remember.",
+          "Forever Digital is a vibrant vault for your soul. Save your stories, voice notes, photos and the messy living parts of you — for the people who'll remember.",
       },
       { property: "og:title", content: "Test Legacy" },
       {
@@ -88,9 +88,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Test Legacy" },
-      { name: "description", content: "Soul Legacy is a revenue-generating website that monetizes digital legacies with customizable subscription tiers and secure sharing." },
-      { property: "og:description", content: "Soul Legacy is a revenue-generating website that monetizes digital legacies with customizable subscription tiers and secure sharing." },
-      { name: "twitter:description", content: "Soul Legacy is a revenue-generating website that monetizes digital legacies with customizable subscription tiers and secure sharing." },
+      { name: "description", content: "Forever Digital is a revenue-generating website that monetizes digital legacies with customizable subscription tiers and secure sharing." },
+      { property: "og:description", content: "Forever Digital is a revenue-generating website that monetizes digital legacies with customizable subscription tiers and secure sharing." },
+      { name: "twitter:description", content: "Forever Digital is a revenue-generating website that monetizes digital legacies with customizable subscription tiers and secure sharing." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7ba59fb8-a4dd-4805-bb6f-24ed064e3eb1/id-preview-7c91cc44--22b03391-7aae-4ebf-a5ad-9158307732b8.lovable.app-1778752623713.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7ba59fb8-a4dd-4805-bb6f-24ed064e3eb1/id-preview-7c91cc44--22b03391-7aae-4ebf-a5ad-9158307732b8.lovable.app-1778752623713.png" },
     ],
