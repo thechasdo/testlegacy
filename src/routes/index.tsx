@@ -241,12 +241,12 @@ function Index() {
       <PaymentTestModeBanner />
       {/* NAV */}
       <nav className="relative z-20 max-w-7xl mx-auto flex items-center justify-between px-6 py-6">
-        <div className="flex items-center gap-2">
-          <div className="size-8 rounded-full bg-pop-pink border-2 border-pop-ink flex items-center justify-center">
-            <Sparkle className="size-4 text-pop-yellow" />
+        <div className="flex items-center gap-3">
+          <div className="size-10 rounded-2xl bg-pop-pink border-[3px] border-pop-ink flex items-center justify-center rotate-3 shadow-[3px_3px_0_0_var(--color-pop-ink)]">
+            <Sparkle className="size-5 text-white" fill="white" />
           </div>
-          <span className="font-display text-2xl text-pop-blue tracking-tight">
-            Forever You
+          <span className="font-display text-2xl text-pop-ink tracking-tighter uppercase leading-none">
+            Forever<span className="text-pop-pink">You</span>
           </span>
         </div>
         <div className="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest">
