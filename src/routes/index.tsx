@@ -246,7 +246,7 @@ function Index() {
             <Sparkle className="size-4 text-pop-yellow" />
           </div>
           <span className="font-display text-2xl text-pop-blue tracking-tight">
-            Forever Digital
+            Forever You
           </span>
         </div>
         <div className="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest">
@@ -294,7 +294,7 @@ function Index() {
             </h1>
 
             <p className="mt-6 sm:mt-10 max-w-xl mx-auto lg:mx-0 text-base sm:text-xl font-semibold leading-relaxed text-pop-ink/80">
-              Forever Digital is a technicolor time capsule for your stories, voice
+              Forever You is a technicolor time capsule for your stories, voice
               notes, recipes, and inside jokes. Not a graveyard — a{" "}
               <span className="bg-pop-lime px-1">backyard party</span> that
               lasts a hundred years.
@@ -878,14 +878,14 @@ function Index() {
 
         <div className="max-w-7xl mx-auto mt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-bold uppercase tracking-widest text-pop-ink/60">
           <span className="font-display text-xl text-pop-blue">
-            Forever Digital · forever &amp; always
+            Forever You · forever &amp; always
           </span>
           <div className="flex gap-6">
             <a href="#" className="hover:text-pop-pink">Privacy</a>
             <a href="#" className="hover:text-pop-pink">Terms</a>
             <a href="#" className="hover:text-pop-pink">Manifesto</a>
           </div>
-          <span>© 2026 Forever Digital</span>
+          <span>© 2026 Forever You</span>
         </div>
       </footer>
     </div>

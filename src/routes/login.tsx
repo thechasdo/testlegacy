@@ -60,7 +60,7 @@ function LoginPage() {
     <div className="min-h-screen bg-pop-cream flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md bg-white border-2 border-pop-ink rounded-3xl p-8 shadow-pop-pink">
         <Link to="/" className="font-display text-3xl text-pop-blue">
-          Forever Digital
+          Forever You
         </Link>
         <h1 className="font-display text-3xl uppercase text-pop-blue mt-6">
           {mode === "signin" ? "Welcome back" : "Start your soul"}
