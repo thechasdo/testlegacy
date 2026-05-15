@@ -4,20 +4,20 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Bubblegum-pop nostalgia: bold blue lead + clashing pops of pink, yellow, lime, tangerine */
+/* Forever You — Hyper-pop punch: electric pink lead + acid lime, ultra blue, solar gold on cream */
 @theme {
-  --font-display: "Bungee", "Alfa Slab One", Impact, system-ui, sans-serif;
+  --font-display: "Syne", "Bungee", Impact, system-ui, sans-serif;
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
 
-  --color-pop-blue: oklch(0.62 0.21 255);       /* electric cobalt */
-  --color-pop-blue-deep: oklch(0.42 0.20 260);
-  --color-pop-sky: oklch(0.88 0.10 240);        /* light sky */
-  --color-pop-pink: oklch(0.70 0.25 350);       /* hot pink */
-  --color-pop-yellow: oklch(0.90 0.18 95);      /* sunshine */
-  --color-pop-lime: oklch(0.86 0.21 130);       /* zingy lime */
-  --color-pop-tangerine: oklch(0.74 0.19 50);   /* tangerine */
-  --color-pop-cream: oklch(0.985 0.012 95);     /* warm paper */
-  --color-pop-ink: oklch(0.18 0.04 260);
+  --color-pop-blue: oklch(0.55 0.26 265);       /* ultra blue #1A56FF */
+  --color-pop-blue-deep: oklch(0.38 0.24 268);
+  --color-pop-sky: oklch(0.88 0.10 240);
+  --color-pop-pink: oklch(0.66 0.30 355);       /* electric pink #FF3399 */
+  --color-pop-yellow: oklch(0.89 0.20 92);      /* solar gold #FFD600 */
+  --color-pop-lime: oklch(0.93 0.27 125);       /* acid lime #C1FF00 */
+  --color-pop-tangerine: oklch(0.74 0.19 50);
+  --color-pop-cream: oklch(0.985 0.012 95);
+  --color-pop-ink: oklch(0.16 0.04 265);
 }
 
 /*
@@ -161,7 +161,8 @@
 
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    letter-spacing: -0.01em;
+    font-weight: 800;
+    letter-spacing: -0.04em;
     line-height: 0.9;
     text-wrap: balance;
   }

@@ -59,8 +59,13 @@ function LoginPage() {
   return (
     <div className="min-h-screen bg-pop-cream flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md bg-white border-2 border-pop-ink rounded-3xl p-8 shadow-pop-pink">
-        <Link to="/" className="font-display text-3xl text-pop-blue">
-          Forever You
+        <Link to="/" className="flex items-center gap-3">
+          <div className="size-10 rounded-2xl bg-pop-pink border-[3px] border-pop-ink flex items-center justify-center rotate-3 shadow-[3px_3px_0_0_var(--color-pop-ink)]">
+            <span className="font-display text-white text-xl leading-none">★</span>
+          </div>
+          <span className="font-display text-2xl text-pop-ink tracking-tighter uppercase leading-none">
+            Forever<span className="text-pop-pink">You</span>
+          </span>
         </Link>
         <h1 className="font-display text-3xl uppercase text-pop-blue mt-6">
           {mode === "signin" ? "Welcome back" : "Start your soul"}
