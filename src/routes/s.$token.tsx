@@ -119,7 +119,7 @@ function SharedSoul() {
       </div>
 
       <footer className="text-center pb-12 text-xs font-bold uppercase tracking-widest text-pop-ink/50">
-        Shared via Forever Digital
+        Shared via Forever You
       </footer>
     </div>
   );

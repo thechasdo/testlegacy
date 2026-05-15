@@ -181,7 +181,7 @@ function InvitePage() {
         </div>
 
         <p className="mt-8 text-center text-xs font-bold uppercase text-pop-ink/50">
-          Delivered via Forever Digital
+          Delivered via Forever You
         </p>
       </div>
     </div>
