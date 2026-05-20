@@ -73,13 +73,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Test Legacy" },
+      { title: "Legacy by chasdo" },
       {
         name: "description",
         content:
-          "Forever You is a vibrant vault for your soul. Save your stories, voice notes, photos and the messy living parts of you — for the people who'll remember.",
+          "Legacy by chasdo is a vibrant vault for your stories. Save your voice notes, photos and the messy living parts of you — for the people who'll remember.",
       },
-      { property: "og:title", content: "Test Legacy" },
+      { property: "og:title", content: "Legacy by chasdo" },
       {
         property: "og:description",
         content:
@@ -87,10 +87,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Test Legacy" },
-      { name: "description", content: "Forever You is a revenue-generating website that monetizes digital legacies with customizable subscription tiers and secure sharing." },
-      { property: "og:description", content: "Forever You is a revenue-generating website that monetizes digital legacies with customizable subscription tiers and secure sharing." },
-      { name: "twitter:description", content: "Forever You is a revenue-generating website that monetizes digital legacies with customizable subscription tiers and secure sharing." },
+      { name: "twitter:title", content: "Legacy by chasdo" },
+      { name: "twitter:description", content: "A technicolor time capsule for your memories, messages, and the bits of life worth keeping." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7ba59fb8-a4dd-4805-bb6f-24ed064e3eb1/id-preview-7c91cc44--22b03391-7aae-4ebf-a5ad-9158307732b8.lovable.app-1778752623713.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7ba59fb8-a4dd-4805-bb6f-24ed064e3eb1/id-preview-7c91cc44--22b03391-7aae-4ebf-a5ad-9158307732b8.lovable.app-1778752623713.png" },
     ],

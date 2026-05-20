@@ -23,8 +23,8 @@ function AuthedShell() {
             <div className="size-9 rounded-2xl bg-pop-pink border-[3px] border-pop-ink flex items-center justify-center rotate-3 shadow-[3px_3px_0_0_var(--color-pop-ink)]">
               <span className="font-display text-white text-lg leading-none">★</span>
             </div>
-            <span className="font-display text-2xl text-pop-ink tracking-tighter uppercase leading-none">
-              Forever<span className="text-pop-pink">You</span>
+            <span className="font-display text-2xl text-pop-ink tracking-tighter uppercase leading-none flex items-baseline gap-1.5">
+              Legacy<span className="text-pop-pink font-sans normal-case text-xs font-bold tracking-normal">by chasdo</span>
             </span>
           </Link>
           <div className="flex items-center gap-4">
