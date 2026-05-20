@@ -677,19 +677,19 @@ function Index() {
                 </thead>
                 <tbody className="font-semibold text-sm">
                   {[
-                    { label: "🐬 Memory storage", values: ["1 GB", "10 GB", "100 GB", "500 GB", "1 TB"] },
-                    { label: "🐘 Trusted heirs", values: ["2", "5", "Unlimited", "Unlimited", "Unlimited"] },
-                    { label: "👯 Future-send letters", values: ["3", "25", "Unlimited", "Smart triggers", "White-glove"] },
-                    { label: "🎙️ Voice memos (HQ)", values: [false, true, true, true, true] },
-                    { label: "📼 Video memos", values: [false, "SD", "HD", "4K", "4K + RAW"] },
-                    { label: "🌞 Custom domain", values: ["Add-on", true, true, "Multi", "Multi + email"] },
-                    { label: "🎀 Collaborative albums", values: [false, false, true, true, true] },
-                    { label: "🔍 Auto-tagging & search", values: [false, false, false, true, true] },
-                    { label: "📚 Annual printed photo book", values: ["Add-on", "Zine add-on", "Add-on", true, true] },
-                    { label: "🐠 Concierge digitization", values: [false, false, "Add-on", true, true] },
-                    { label: "🦩 Heirloom NFC tags", values: [false, false, false, "Add-on", "4/yr included"] },
-                    { label: "✨ Dedicated archivist", values: [false, false, false, false, true] },
-                    { label: "♾️ Priority forever-storage", values: [false, false, false, false, true] },
+                    { label: "🐬 Memory storage", values: ["1 GB", "50 GB", "500 GB", "2 TB"] },
+                    { label: "🐘 Trusted heirs", values: ["2", "5", "Unlimited", "Unlimited"] },
+                    { label: "👯 Future-send letters", values: ["3", "25", "Unlimited", "White-glove"] },
+                    { label: "🎙️ Voice memos (HQ)", values: [false, true, true, true] },
+                    { label: "📼 Video memos", values: [false, "SD", "HD", "4K + RAW"] },
+                    { label: "🌞 Custom domain", values: ["Add-on", true, true, "Multi + email"] },
+                    { label: "🎀 Collaborative albums", values: [false, false, true, true] },
+                    { label: "🔍 Auto-tagging & search", values: [false, false, true, true] },
+                    { label: "📚 Annual printed photo book", values: ["Add-on", "Zine add-on", "Add-on", true] },
+                    { label: "🐠 Concierge digitization", values: [false, false, "Add-on", true] },
+                    { label: "🦩 Heirloom NFC tags", values: [false, false, "Add-on", "4/yr included"] },
+                    { label: "✨ Dedicated archivist", values: [false, false, false, true] },
+                    { label: "♾️ Priority forever-storage", values: [false, false, false, true] },
                   ].map((row, i) => (
                     <tr
                       key={row.label}
