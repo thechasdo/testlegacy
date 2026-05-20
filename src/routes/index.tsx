@@ -847,7 +847,7 @@ function Index() {
               href="#pricing"
               className="inline-block mt-10 bg-pop-blue text-white text-xl px-12 py-5 rounded-full font-display uppercase border-2 border-pop-ink hover:bg-pop-pink transition-colors"
             >
-              Claim your username
+              Reserve your legacy
             </a>
           </div>
         </div>
