@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Forever You — Hyper-pop punch: electric pink lead + acid lime, ultra blue, solar gold on cream */
+/* Legacy by chasdo — Hyper-pop punch: electric pink lead + acid lime, ultra blue, solar gold on cream */
 @theme {
   --font-display: "Syne", "Bungee", Impact, system-ui, sans-serif;
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
