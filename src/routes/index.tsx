@@ -787,15 +787,15 @@ function Index() {
                 },
                 {
                   q: "What's the difference between Keepsake and Snapshot?",
-                  a: "Keepsake (free) is the always-on starter: 1 GB, 1 trusted heir, and basic future-send letters so you can try the platform forever. Snapshot ($9.99/mo) bumps you to 25 GB, 3 heirs, voice memos, and unlimited future-send — it's where most people land once they start uploading family photos in bulk.",
+                  a: "Keepsake (free) is the always-on starter: 1 GB, 2 trusted heirs, and basic future-send letters so you can try the platform forever. Snapshot ($4.99/mo or $49/yr) bumps you to 50 GB, 5 heirs, voice memos, a custom domain, and 25 future-send letters — it's where most people land once they start uploading family photos in bulk.",
                 },
                 {
-                  q: "What unlocks at Collector and Archivist?",
-                  a: "Collector ($19.99/mo) is the most-loved tier: 100 GB, 10 heirs, video memos, custom domain, and collaborative albums so siblings or kids can add their own pieces. Archivist ($34.99/mo) adds 500 GB, AI auto-tagging, an annual printed photo book mailed to you, and concierge digitization — send us a shoebox of old prints, we scan and upload them.",
+                  q: "What unlocks at Collector?",
+                  a: "Collector ($11.99/mo or $119/yr) is the most-loved tier: 500 GB, unlimited heirs, HD video memos, custom domain + email, collaborative family albums so siblings or kids can add their own pieces, and auto-tagging so you can actually find that one photo from 2007. It's the sweet spot for most families.",
                 },
                 {
                   q: "What's included in Curator?",
-                  a: "Curator ($49.99/mo, $479.90/yr) is the everything tier: unlimited storage, unlimited heirs, heirloom NFC tags (tap a physical object to play a memory), a dedicated human archivist, and priority forever-storage backed by our long-term endowment. It's built for families who are documenting multiple generations at once.",
+                  a: "Curator ($24.99/mo or $249/yr) is the everything tier: 2 TB of high-res video, concierge digitization (send us a shoebox of old prints, we scan and upload), an annual printed photo book mailed to you, heirloom NFC tags (tap a physical object to play a memory), a dedicated human archivist, and priority forever-storage backed by our long-term endowment. Built for families documenting multiple generations at once.",
                 },
                 {
                   q: "Can I switch tiers mid-cycle?",
