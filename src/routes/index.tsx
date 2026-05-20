@@ -854,14 +854,14 @@ function Index() {
 
         <div className="max-w-7xl mx-auto mt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-bold uppercase tracking-widest text-pop-ink/60">
           <span className="font-display text-xl text-pop-blue">
-            Forever You · forever &amp; always
+            Legacy by chasdo · forever &amp; always
           </span>
           <div className="flex gap-6">
             <a href="#" className="hover:text-pop-pink">Privacy</a>
             <a href="#" className="hover:text-pop-pink">Terms</a>
             <a href="#" className="hover:text-pop-pink">Manifesto</a>
           </div>
-          <span>© 2026 Forever You</span>
+          <span>© 2026 Legacy by chasdo</span>
         </div>
       </footer>
     </div>
