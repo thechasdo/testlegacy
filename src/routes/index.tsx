@@ -270,7 +270,7 @@ function Index() {
             </h1>
 
             <p className="mt-6 sm:mt-10 max-w-xl mx-auto lg:mx-0 text-base sm:text-xl font-semibold leading-relaxed text-pop-ink/80">
-              Forever You is a technicolor time capsule for your stories, voice
+              Legacy by chasdo is a technicolor time capsule for your stories, voice
               notes, recipes, and inside jokes. Not a graveyard — a{" "}
               <span className="bg-pop-lime px-1">backyard party</span> that
               lasts a hundred years.
