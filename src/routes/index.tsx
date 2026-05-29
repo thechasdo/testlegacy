@@ -4,6 +4,7 @@ import { usePaddleCheckout } from "@/hooks/use-paddle-checkout";
 import { useAuth } from "@/hooks/use-auth";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { Reveal } from "@/components/Reveal";
+import { Logo } from "@/components/Logo";
 import {
   Accordion,
   AccordionContent,
