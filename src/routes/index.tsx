@@ -218,12 +218,7 @@ function Index() {
       {/* NAV */}
       <nav className="relative z-20 max-w-7xl mx-auto flex items-center justify-between px-6 py-6">
         <div className="flex items-center gap-3">
-          <div className="size-10 rounded-2xl bg-pop-pink border-[3px] border-pop-ink flex items-center justify-center rotate-3 shadow-[3px_3px_0_0_var(--color-pop-ink)]">
-            <Sparkle className="size-5 text-white" />
-          </div>
-          <span className="font-display text-2xl text-pop-ink tracking-tighter uppercase leading-none flex items-baseline gap-1.5">
-            Legacy<span className="text-pop-pink font-sans normal-case text-xs font-bold tracking-normal">by chasdo</span>
-          </span>
+          <Logo size={44} />
         </div>
         <div className="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest">
           <a href="#vault" className="hover:text-pop-pink transition-colors">
@@ -240,7 +235,7 @@ function Index() {
           href="#pricing"
           className="bg-pop-blue text-white px-6 py-2.5 rounded-full font-bold uppercase tracking-tight text-sm border-2 border-pop-ink shadow-pop-pink hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-transform"
         >
-          Start Your Legacy
+          Start Your Soulprint
         </a>
       </nav>
 
@@ -270,7 +265,7 @@ function Index() {
             </h1>
 
             <p className="mt-6 sm:mt-10 max-w-xl mx-auto lg:mx-0 text-base sm:text-xl font-semibold leading-relaxed text-pop-ink/80">
-              Legacy by chasdo is a technicolor time capsule for your stories, voice
+              Soulprint is a technicolor time capsule for your stories, voice
               notes, recipes, and inside jokes. Not a graveyard — a{" "}
               <span className="bg-pop-lime px-1">backyard party</span> that
               lasts a hundred years.
@@ -847,21 +842,21 @@ function Index() {
               href="#pricing"
               className="inline-block mt-10 bg-pop-blue text-white text-xl px-12 py-5 rounded-full font-display uppercase border-2 border-pop-ink hover:bg-pop-pink transition-colors"
             >
-              Reserve your legacy
+              Reserve your Soulprint
             </a>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto mt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-bold uppercase tracking-widest text-pop-ink/60">
           <span className="font-display text-xl text-pop-blue">
-            Legacy by chasdo · forever &amp; always
+            Soulprint · memories live on
           </span>
           <div className="flex gap-6">
             <a href="#" className="hover:text-pop-pink">Privacy</a>
             <a href="#" className="hover:text-pop-pink">Terms</a>
             <a href="#" className="hover:text-pop-pink">Manifesto</a>
           </div>
-          <span>© 2026 Legacy by chasdo</span>
+          <span>© 2026 Soulprint</span>
         </div>
       </footer>
     </div>
