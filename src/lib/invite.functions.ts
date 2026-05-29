@@ -19,6 +19,7 @@ export const listInvitations = createServerFn({ method: "GET" })
       .from("legacy_invitations")
       .select("*")
       .eq("legacy_id", data.legacy_id)
+      .eq("user_id", context.userId)
       .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
     return { invitations: rows ?? [] };
@@ -70,14 +71,29 @@ export const createInvitation = createServerFn({ method: "POST" })
     return { invitation: row };
   });
 
+async function assertInviteOwner(
+  context: { supabase: any; userId: string },
+  id: string,
+) {
+  const { data: row, error } = await context.supabase
+    .from("legacy_invitations")
+    .select("user_id")
+    .eq("id", id)
+    .single();
+  if (error || !row) throw new Error("Invitation not found");
+  if (row.user_id !== context.userId) throw new Error("Not allowed");
+}
+
 export const revokeInvitation = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
+    await assertInviteOwner(context, data.id);
     const { error } = await context.supabase
       .from("legacy_invitations")
       .update({ revoked_at: new Date().toISOString() })
-      .eq("id", data.id);
+      .eq("id", data.id)
+      .eq("user_id", context.userId);
     if (error) throw new Error(error.message);
     return { ok: true };
   });
@@ -86,10 +102,12 @@ export const deleteInvitation = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
+    await assertInviteOwner(context, data.id);
     const { error } = await context.supabase
       .from("legacy_invitations")
       .delete()
-      .eq("id", data.id);
+      .eq("id", data.id)
+      .eq("user_id", context.userId);
     if (error) throw new Error(error.message);
     return { ok: true };
   });

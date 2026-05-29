@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet, redirect, Link, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
+import { Logo } from "@/components/Logo";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: async () => {
@@ -20,12 +21,7 @@ function AuthedShell() {
       <nav className="border-b-2 border-pop-ink bg-white">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link to="/dashboard" className="flex items-center gap-3">
-            <div className="size-9 rounded-2xl bg-pop-pink border-[3px] border-pop-ink flex items-center justify-center rotate-3 shadow-[3px_3px_0_0_var(--color-pop-ink)]">
-              <span className="font-display text-white text-lg leading-none">★</span>
-            </div>
-            <span className="font-display text-2xl text-pop-ink tracking-tighter uppercase leading-none flex items-baseline gap-1.5">
-              Legacy<span className="text-pop-pink font-sans normal-case text-xs font-bold tracking-normal">by chasdo</span>
-            </span>
+            <Logo size={40} />
           </Link>
           <div className="flex items-center gap-4">
             <span className="hidden sm:inline text-sm font-bold text-pop-ink/70">
