@@ -3,12 +3,24 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 function makeToken() {
-  // 32-char URL-safe token
   const bytes = new Uint8Array(24);
   crypto.getRandomValues(bytes);
   return Array.from(bytes)
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
+}
+
+async function assertShareOwner(
+  context: { supabase: any; userId: string },
+  id: string,
+) {
+  const { data: row, error } = await context.supabase
+    .from("legacy_shares")
+    .select("user_id")
+    .eq("id", id)
+    .single();
+  if (error || !row) throw new Error("Share not found");
+  if (row.user_id !== context.userId) throw new Error("Not allowed");
 }
 
 export const listShares = createServerFn({ method: "GET" })
@@ -19,6 +31,7 @@ export const listShares = createServerFn({ method: "GET" })
       .from("legacy_shares")
       .select("*")
       .eq("legacy_id", data.legacy_id)
+      .eq("user_id", context.userId)
       .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
     return { shares: rows ?? [] };
@@ -31,13 +44,11 @@ export const createShare = createServerFn({ method: "POST" })
       .object({
         legacy_id: z.string().uuid(),
         label: z.string().max(80).optional(),
-        // hours from now; null = never expire
         expires_in_hours: z.number().int().min(1).max(24 * 365).nullable(),
       })
       .parse(d),
   )
   .handler(async ({ data, context }) => {
-    // verify ownership of legacy
     const { data: legacy, error: lerr } = await context.supabase
       .from("legacies")
       .select("id,user_id")
@@ -70,10 +81,12 @@ export const revokeShare = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
+    await assertShareOwner(context, data.id);
     const { error } = await context.supabase
       .from("legacy_shares")
       .update({ revoked_at: new Date().toISOString() })
-      .eq("id", data.id);
+      .eq("id", data.id)
+      .eq("user_id", context.userId);
     if (error) throw new Error(error.message);
     return { ok: true };
   });
@@ -82,10 +95,12 @@ export const deleteShare = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
+    await assertShareOwner(context, data.id);
     const { error } = await context.supabase
       .from("legacy_shares")
       .delete()
-      .eq("id", data.id);
+      .eq("id", data.id)
+      .eq("user_id", context.userId);
     if (error) throw new Error(error.message);
     return { ok: true };
   });

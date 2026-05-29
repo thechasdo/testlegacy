@@ -43,10 +43,19 @@ export const deleteLegacy = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
+    const { data: existing, error: ferr } = await context.supabase
+      .from("legacies")
+      .select("user_id")
+      .eq("id", data.id)
+      .single();
+    if (ferr || !existing) throw new Error("Soul not found");
+    if (existing.user_id !== context.userId) throw new Error("Not allowed");
+
     const { error } = await context.supabase
       .from("legacies")
       .delete()
-      .eq("id", data.id);
+      .eq("id", data.id)
+      .eq("user_id", context.userId);
     if (error) throw new Error(error.message);
     return { ok: true };
   });
@@ -55,14 +64,21 @@ export const getLegacy = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
-    const [{ data: legacy }, { data: memories }] = await Promise.all([
-      context.supabase.from("legacies").select("*").eq("id", data.id).single(),
-      context.supabase
-        .from("memories")
-        .select("*")
-        .eq("legacy_id", data.id)
-        .order("created_at", { ascending: false }),
-    ]);
+    const { data: legacy, error: lerr } = await context.supabase
+      .from("legacies")
+      .select("*")
+      .eq("id", data.id)
+      .eq("user_id", context.userId)
+      .maybeSingle();
+    if (lerr) throw new Error(lerr.message);
+    if (!legacy) throw new Error("Not allowed");
+
+    const { data: memories, error: merr } = await context.supabase
+      .from("memories")
+      .select("*")
+      .eq("legacy_id", data.id)
+      .order("created_at", { ascending: false });
+    if (merr) throw new Error(merr.message);
     return { legacy, memories: memories ?? [] };
   });
 
@@ -80,6 +96,15 @@ export const addMemory = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data, context }) => {
+    // verify ownership of the legacy before adding memories
+    const { data: legacy, error: lerr } = await context.supabase
+      .from("legacies")
+      .select("user_id")
+      .eq("id", data.legacy_id)
+      .single();
+    if (lerr || !legacy) throw new Error("Soul not found");
+    if (legacy.user_id !== context.userId) throw new Error("Not allowed");
+
     const { data: row, error } = await context.supabase
       .from("memories")
       .insert({
@@ -100,7 +125,19 @@ export const deleteMemory = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
-    const { error } = await context.supabase.from("memories").delete().eq("id", data.id);
+    const { data: existing, error: ferr } = await context.supabase
+      .from("memories")
+      .select("user_id")
+      .eq("id", data.id)
+      .single();
+    if (ferr || !existing) throw new Error("Memory not found");
+    if (existing.user_id !== context.userId) throw new Error("Not allowed");
+
+    const { error } = await context.supabase
+      .from("memories")
+      .delete()
+      .eq("id", data.id)
+      .eq("user_id", context.userId);
     if (error) throw new Error(error.message);
     return { ok: true };
   });
